@@ -2,7 +2,6 @@ import pandas as pd
 import joblib
 import os
 
-
 def load_model(model_path: str):
     """
     Load a trained model from the specified file.
@@ -14,7 +13,6 @@ def load_model(model_path: str):
     Trained model object.
     """
     return joblib.load(model_path)
-
 
 def prepare_input(input_data: dict, model_features: list) -> pd.DataFrame:
     """
@@ -33,21 +31,22 @@ def prepare_input(input_data: dict, model_features: list) -> pd.DataFrame:
     # Convert categorical fields to one-hot encoded format
     df = pd.get_dummies(df)
 
-    # Find out which features the model expects that are missing in the input
-    missing_cols = [col for col in model_features if col not in df.columns]
+    # Identify any missing columns that the model expects
+    missing_cols = []
+    for col in model_features:
+        if col not in df.columns:
+            missing_cols.append(col)
 
-    # Create a DataFrame with those missing columns and fill them with 0
-    # This avoids fragmentation warnings and ensures correct shape
+    # Create a DataFrame with the missing columns and fill them with 0
     missing_df = pd.DataFrame([[0] * len(missing_cols)], columns=missing_cols)
 
-    # Combine the user input with the missing columns
+    # Combine the existing data with the missing columns
     df = pd.concat([df, missing_df], axis=1)
 
-    # Reorder columns to match the order the model was trained on
+    # Reorder the columns to match the model's expected feature order
     df = df[model_features]
 
     return df
-
 
 if __name__ == "__main__":
     # Path to the trained model file
@@ -63,14 +62,14 @@ if __name__ == "__main__":
 
     # Example input to test the prediction logic (replace with your own values)
     example_input = {
-        "OverallQual": 7,
-        "GrLivArea": 2110,
-        "GarageCars": 5,
+        "OverallQual": 9,
+        "GrLivArea": 1710,
+        "GarageCars": 2,
         "TotalBsmtSF": 856,
-        "FullBath": 3,
-        "YearBuilt": 2020,
+        "FullBath": 2,
+        "YearBuilt": 2003,
         "Neighborhood": "CollgCr",
-        "HouseStyle": "2Story",
+        "HouseStyle": "2Story"
     }
 
     # Load the cleaned training data to get model's expected feature columns
