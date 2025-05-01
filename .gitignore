@@ -1,1 +1,27 @@
-.venv/*
+# Virtual environment
+.venv/
+
+# Python cache
+__pycache__/
+*.py[cod]
+
+# Logs
+logs/
+*.log
+
+# Model files
+model/*.pkl
+model/*.joblib
+
+# Dataset outputs
+datasets/processed/
+
+# Jupyter Notebooks (if ever added)
+.ipynb_checkpoints/
+
+# VS Code settings (optional, if team doesn't want to share)
+.vscode/
+
+# OS-specific
+.DS_Store
+Thumbs.db
