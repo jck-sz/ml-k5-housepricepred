@@ -22,7 +22,7 @@ This project predicts house prices using the Ames, Iowa housing dataset. It incl
 │   └── preprocess.log
 │
 ├── model/                   # Trained model artifacts (e.g., .pkl files)
-│   └── house_price_model.pkl (to be generated)
+│   └── house_price_model.pkl (to be generated and ignored by Git)
 │
 ├── src/                     # Source code for the ML pipeline
 │   ├── data_preprocessing/  # Data cleaning scripts
@@ -64,12 +64,30 @@ This project predicts house prices using the Ames, Iowa housing dataset. It incl
    ```
 
 4. **Train the model**
-   *(Once `train_model.py` is implemented)*
    ```bash
    python src/models/train_model.py
    ```
 
-5. **Launch the app**
+5. **Run predictions**
+   ```bash
+   python src/models/predict.py
+   ```
+
+   Inside `predict.py`, modify the `example_input` dictionary to try different house attributes:
+   ```python
+   example_input = {
+       "OverallQual": 7,
+       "GrLivArea": 1710,
+       "GarageCars": 2,
+       "TotalBsmtSF": 856,
+       "FullBath": 2,
+       "YearBuilt": 2003,
+       "Neighborhood": "CollgCr",
+       "HouseStyle": "2Story"
+   }
+   ```
+
+6. **Launch the app**
    *(Once `app.py` is implemented)*
    ```bash
    streamlit run app/app.py
@@ -88,3 +106,13 @@ This project predicts house prices using the Ames, Iowa housing dataset. It incl
 - All model artifacts and logs are excluded from Git using `.gitignore`.
 - Cleaned data is stored under `datasets/processed/`.
 - Logging output (e.g., imputation details) goes to `logs/preprocess.log`.
+
+---
+
+## 🚧 TODOs
+
+- Implement feature engineering (`build_features.py`)
+- Build frontend interface (`app.py`)
+- Add unit tests under `tests/`
+- Optionally switch to `LinearRegression` model for simplicity
+- Prepare final submission script to predict on `ames-test.csv`
