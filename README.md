@@ -88,10 +88,11 @@ This project predicts house prices using the Ames, Iowa housing dataset. It incl
    ```
 
 6. **Launch the app**
-   *(Once `app.py` is implemented)*
    ```bash
    streamlit run app/app.py
    ```
+
+   The Streamlit app provides a simple form to enter house details and view the predicted price. Make sure the trained model (`house_price_model.pkl`) and the cleaned dataset (`ames-train-clean.csv`) are available in the expected folders before running the app.
 
 ---
 
@@ -112,7 +113,7 @@ This project predicts house prices using the Ames, Iowa housing dataset. It incl
 ## 🚧 TODOs
 
 - Implement feature engineering (`build_features.py`)
-- Build frontend interface (`app.py`)
+- Update frontend interface to include more features (`app.py`)
 - Add unit tests under `tests/`
-- Optionally switch to `LinearRegression` model for simplicity
+- Optionally switch to `LinearRegression` model for simplicity or a different more advanced model (?)
 - Prepare final submission script to predict on `ames-test.csv`
