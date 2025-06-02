@@ -68,7 +68,7 @@ This project predicts house prices using the Ames, Iowa housing dataset. It incl
    python src/models/train_model.py
    ```
 
-5. **Run predictions**
+5. **OPTIONAL --- Run predictions --- OPTIONAL**
    ```bash
    python src/models/predict.py
    ```

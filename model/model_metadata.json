@@ -1,0 +1,111 @@
+{
+    "training_date": "2025-06-02 23:57:31",
+    "model_type": "RandomForestRegressor",
+    "parameters": {
+        "bootstrap": true,
+        "max_depth": 20,
+        "max_features": null,
+        "min_samples_leaf": 1,
+        "min_samples_split": 2,
+        "n_estimators": 300
+    },
+    "metrics": {
+        "validation": {
+            "rmse": 12409.340276697207,
+            "mae": 7258.301032815103,
+            "r2": 0.9736754641290944,
+            "mape": 4.341594951303321
+        },
+        "cross_validation": {
+            "cv_rmse_mean": 16473.185732858685,
+            "cv_rmse_std": 3190.3944835867615,
+            "cv_r2_mean": 0.9564766836438542,
+            "cv_r2_std": 0.012089829254835793
+        },
+        "n_samples_train": 1168,
+        "n_samples_val": 292,
+        "n_features": 339
+    },
+    "top_features": [
+        {
+            "feature": "Qual_SF_Interaction",
+            "importance": 0.5257004070961314
+        },
+        {
+            "feature": "PriceDeviationFromNeighborhood",
+            "importance": 0.20331679362159516
+        },
+        {
+            "feature": "AvgQuality",
+            "importance": 0.07431604475295674
+        },
+        {
+            "feature": "NeighborhoodMeanPrice",
+            "importance": 0.03249578199573139
+        },
+        {
+            "feature": "NeighborhoodMedianPrice",
+            "importance": 0.029480883163877685
+        },
+        {
+            "feature": "TotalSF_Log",
+            "importance": 0.01707925605999476
+        },
+        {
+            "feature": "TotalSF",
+            "importance": 0.016046913255375588
+        },
+        {
+            "feature": "NeighborhoodPriceStd",
+            "importance": 0.014806491881427518
+        },
+        {
+            "feature": "NeighborhoodAvgQuality",
+            "importance": 0.01056074607153447
+        },
+        {
+            "feature": "TotalBsmtSF",
+            "importance": 0.010067274376984781
+        },
+        {
+            "feature": "TotalSF_Squared",
+            "importance": 0.009626488972439073
+        },
+        {
+            "feature": "OverallQual",
+            "importance": 0.004421408336139542
+        },
+        {
+            "feature": "GarageCars",
+            "importance": 0.0030906523710041395
+        },
+        {
+            "feature": "BsmtFinSF1",
+            "importance": 0.002494031791477997
+        },
+        {
+            "feature": "GarageArea",
+            "importance": 0.002413367534563933
+        },
+        {
+            "feature": "TotalBathrooms",
+            "importance": 0.0018129783447189815
+        },
+        {
+            "feature": "YearBuilt",
+            "importance": 0.0017397170952472266
+        },
+        {
+            "feature": "1stFlrSF",
+            "importance": 0.0014993661773708418
+        },
+        {
+            "feature": "HouseAge",
+            "importance": 0.0013815227330089043
+        },
+        {
+            "feature": "LotFrontage",
+            "importance": 0.0013071183312220577
+        }
+    ]
+}
