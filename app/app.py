@@ -3,19 +3,17 @@ import pandas as pd
 import joblib
 import os
 
-# Define the list of features we'll accept from the user
+# Rozszerzona lista cech do predykcji
 FEATURES = [
-    "OverallQual",
-    "GrLivArea",
-    "GarageCars",
-    "TotalBsmtSF",
-    "FullBath",
-    "YearBuilt",
-    "Neighborhood",
-    "HouseStyle"
+    "OverallQual", "OverallCond", "YearBuilt", "YearRemodAdd",
+    "GrLivArea", "TotalBsmtSF", "BsmtFinSF1", "GarageCars",
+    "GarageArea", "FullBath", "HalfBath", "Bedroom",
+    "TotRmsAbvGrd", "Fireplaces", "KitchenQual", "ExterQual",
+    "HeatingQC", "Neighborhood", "HouseStyle", "GarageFinish",
+    "MasVnrArea", "LotArea", "PavedDrive"
 ]
 
-# Load the trained model
+# Wczytaj model
 @st.cache_resource
 def load_model():
     model_path = "model/house_price_model.pkl"
@@ -24,72 +22,89 @@ def load_model():
         return None
     return joblib.load(model_path)
 
-# Load model features from training set
+# Wczytaj cechy z modelu
 @st.cache_data
 def get_model_features():
     df = pd.read_csv("datasets/processed/ames-train-clean.csv")
     X = pd.get_dummies(df.drop(columns=["SalePrice"]))
     return X.columns.tolist()
 
-# Prepare user input for prediction
+# Przygotuj dane wejściowe
 def prepare_input(user_input, model_features):
     df = pd.DataFrame([user_input])
     df = pd.get_dummies(df)
-
-    # Add missing columns with 0
-    missing_cols = []
-    for col in model_features:
-        if col not in df.columns:
-            missing_cols.append(col)
-
-    # Create a DataFrame with 0s for all missing columns
-    missing_df = pd.DataFrame([[0] * len(missing_cols)], columns=missing_cols)
-
-    # Combine input with missing columns
+    missing_cols = [col for col in model_features if col not in df.columns]
+    missing_df = pd.DataFrame([[0]*len(missing_cols)], columns=missing_cols)
     df = pd.concat([df, missing_df], axis=1)
-
-    # Reorder columns to match model
-    df = df[model_features]
-
-
-    # Reorder columns to match model input
     df = df[model_features]
     return df
 
 # Streamlit app
+# UI aplikacji
 st.title("🏠 House Price Prediction App")
 
-st.write("Enter the house features below to predict its sale price:")
+st.write("Wprowadź dane nieruchomości, by oszacować cenę:")
 
-# Input fields
-overall_qual = st.slider("Overall Quality (1-10)", 1, 10, 5)
-gr_liv_area = st.number_input("Above Ground Living Area (GrLivArea)", min_value=100, max_value=5000, value=1500)
-garage_cars = st.selectbox("Garage Capacity (GarageCars)", options=[0, 1, 2, 3, 4], index=2)
-total_bsmt_sf = st.number_input("Total Basement SF (TotalBsmtSF)", min_value=0, max_value=3000, value=800)
-full_bath = st.selectbox("Number of Full Bathrooms (FullBath)", options=[0, 1, 2, 3], index=1)
-year_built = st.number_input("Year Built", min_value=1870, max_value=2025, value=1990)
-
-neighborhood = st.selectbox("Neighborhood", options=[
+# Pola formularza
+overall_qual = st.slider("Jakość wykończenia (1-10)", 1, 10, 5)
+overall_cond = st.slider("Stan techniczny (1-10)", 1, 10, 5)
+year_built = st.number_input("Rok budowy", 1870, 2025, 1990)
+year_remod = st.number_input("Rok remontu", 1870, 2025, 1995)
+gr_liv_area = st.number_input("Powierzchnia mieszkalna (GrLivArea)", 100, 5000, 1500)
+total_bsmt_sf = st.number_input("Powierzchnia piwnicy", 0, 3000, 800)
+bsmt_fin_sf1 = st.number_input("Wykończona część piwnicy", 0, 3000, 500)
+garage_cars = st.selectbox("Liczba miejsc w garażu", [0, 1, 2, 3, 4], index=2)
+garage_area = st.number_input("Powierzchnia garażu", 0, 1500, 500)
+full_bath = st.selectbox("Pełne łazienki", [0, 1, 2, 3], index=1)
+half_bath = st.selectbox("Toalety", [0, 1, 2], index=0)
+bedrooms = st.number_input("Liczba sypialni", 0, 10, 3)
+rooms_total = st.number_input("Liczba pokoi (bez łazienek)", 1, 20, 7)
+fireplaces = st.selectbox("Kominki", [0, 1, 2, 3], index=1)
+kitchen_qual = st.selectbox("Jakość kuchni", ["Ex", "Gd", "TA", "Fa", "Po"], index=2)
+exterior_qual = st.selectbox("Jakość elewacji", ["Ex", "Gd", "TA", "Fa", "Po"], index=2)
+heating_qc = st.selectbox("Jakość ogrzewania", ["Ex", "Gd", "TA", "Fa", "Po"], index=2)
+neighborhood = st.selectbox("Dzielnica", [
     'CollgCr', 'Veenker', 'Crawfor', 'NoRidge', 'Mitchel',
     'Somerst', 'NWAmes', 'OldTown', 'BrkSide', 'Sawyer',
     'NridgHt', 'NAmes', 'SawyerW', 'IDOTRR', 'MeadowV',
     'Edwards', 'Timber', 'Gilbert', 'StoneBr', 'ClearCr',
-    'NPkVill', 'Blmngtn', 'BrDale', 'SWISU', 'Blueste'])
-house_style = st.selectbox("House Style", options=[
+    'NPkVill', 'Blmngtn', 'BrDale', 'SWISU', 'Blueste'
+])
+house_style = st.selectbox("Styl domu", [
     '2Story', '1Story', '1.5Fin', '1.5Unf', 'SFoyer',
-    'SLvl', '2.5Unf', '2.5Fin'])
+    'SLvl', '2.5Unf', '2.5Fin'
+])
+garage_finish = st.selectbox("Wykończenie garażu", ["Fin", "RFn", "Unf", "NA"], index=2)
+mas_vnr_area = st.number_input("Powierzchnia elewacji z kamienia/cegły", 0, 1000, 0)
+lot_area = st.number_input("Powierzchnia działki", 1000, 100000, 8000)
+paved_drive = st.selectbox("Utwardzony podjazd", ["Y", "P", "N"], index=0)
 
-# Submit button
-if st.button("Predict Price"):
+# Przycisk predykcji
+if st.button("🔮 Oblicz cenę"):
     input_data = {
         "OverallQual": overall_qual,
-        "GrLivArea": gr_liv_area,
-        "GarageCars": garage_cars,
-        "TotalBsmtSF": total_bsmt_sf,
-        "FullBath": full_bath,
+        "OverallCond": overall_cond,
         "YearBuilt": year_built,
+        "YearRemodAdd": year_remod,
+        "GrLivArea": gr_liv_area,
+        "TotalBsmtSF": total_bsmt_sf,
+        "BsmtFinSF1": bsmt_fin_sf1,
+        "GarageCars": garage_cars,
+        "GarageArea": garage_area,
+        "FullBath": full_bath,
+        "HalfBath": half_bath,
+        "Bedroom": bedrooms,
+        "TotRmsAbvGrd": rooms_total,
+        "Fireplaces": fireplaces,
+        "KitchenQual": kitchen_qual,
+        "ExterQual": exterior_qual,
+        "HeatingQC": heating_qc,
         "Neighborhood": neighborhood,
-        "HouseStyle": house_style
+        "HouseStyle": house_style,
+        "GarageFinish": garage_finish,
+        "MasVnrArea": mas_vnr_area,
+        "LotArea": lot_area,
+        "PavedDrive": paved_drive
     }
 
     model = load_model()
@@ -98,4 +113,4 @@ if st.button("Predict Price"):
 
     if model:
         prediction = model.predict(prepared_input)[0]
-        st.success(f"💰 Estimated Sale Price: ${prediction:,.2f}")
+        st.success(f"💰 Szacowana cena sprzedaży: ${prediction:,.2f}")
