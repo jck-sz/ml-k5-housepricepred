@@ -1,5 +1,5 @@
 {
-    "training_date": "2025-06-03 11:35:38",
+    "training_date": "2025-06-03 12:19:03",
     "model_type": "RandomForestRegressor",
     "parameters": {
         "bootstrap": false,
@@ -17,8 +17,8 @@
             "mape": 8.828835643954475
         },
         "cross_validation": {
-            "cv_rmse_mean": 27654.45860688666,
-            "cv_rmse_std": 4943.800937791056,
+            "cv_rmse_mean": 27654.458606886656,
+            "cv_rmse_std": 4943.800937791053,
             "cv_r2_mean": 0.8783840857346457,
             "cv_r2_std": 0.028541549536262173
         },

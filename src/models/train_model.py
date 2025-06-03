@@ -136,6 +136,29 @@ def train_model_with_tuning(
     # Make predictions on validation set
     y_pred = model.predict(X_val)
     
+    # Save validation data and predictions for evaluation
+    print("\nSaving validation data for evaluation...")
+    val_results = pd.DataFrame({
+        'Actual': y_val,
+        'Predicted': y_pred,
+        'Error': y_pred - y_val,
+        'PercentError': ((y_pred - y_val) / y_val) * 100
+    })
+    
+    # Add the original features for analysis
+    val_results = pd.concat([val_results, X_val.reset_index(drop=True)], axis=1)
+    
+    # Save to CSV
+    os.makedirs("evaluation", exist_ok=True)
+    val_results.to_csv("evaluation/validation_predictions.csv", index=False)
+    print(f"   ✓ Validation results saved to evaluation/validation_predictions.csv")
+    
+    # Also save just the validation features and actual prices separately
+    val_data = X_val.copy()
+    val_data['SalePrice'] = y_val
+    val_data.to_csv("evaluation/validation_set.csv", index=False)
+    print(f"   ✓ Validation set saved to evaluation/validation_set.csv")
+    
     # Calculate metrics
     rmse = sqrt(mean_squared_error(y_val, y_pred))
     mae = mean_absolute_error(y_val, y_pred)
