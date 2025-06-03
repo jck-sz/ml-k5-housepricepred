@@ -14,6 +14,20 @@
 #### **- Podział datasetu na dataset treningowy**
 - *Podzielony 80/20 na trening/walidacja przy użyciu scikit->train_test_split() oraz dataset testowy*
 
+#### **- Hyperparametryzacja**
+- *Wybrano hyperparametr `random_state` o wartości 2137 dla RandomForestRegressor*
+- *Do poeksperymentowania i "fine tuningu" można zmienić następujące:*
+  - *Użyto GridSearchCV do "fine tuningu" i znalezienia odpowiednich parametrów które określają dopasowanie modelu (np. niskie RMSE, MAE, wysokie R²)*
+  - [Sklearn RandomForestRegressor dokumentacja](https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestRegressor.html)
+    - `n_estimators` (val: 100 - 500)  
+    - `max_depth` (val: None; 10-50)  
+    - `max_features` (val: 'auto', 'sqrt', 'log2', None)  
+    - `min_samples_split` (val: 2, 5, 10)  
+    - `min_samples_leaf` (val: 1, 2, 4)  
+    - `bootstrap` (val: True, False)
+
+
+
 ---
 
 ### **Do zrobienia:**
@@ -32,17 +46,7 @@
 #### **- Wizualizacja danych**
 - *Wykresy, mapy cieplne, histogramy, wykresy rozrzutu itp.*
 
-#### **- Hyperparametryzacja**
-- *Wybrano jedynie hyperparametr `random_state` o wartości 2137 dla RandomForestRegressor*
-- *Do poeksperymentowania i "fine tuningu" można zmienić następujące:*
-  - *Warto użyć np. GridSearchCV do "fine tuningu" i znalezienia odpowiednich parametrów które określają dopasowanie modelu (np. niskie RMSE, MAE, wysokie R²)*
-  - [Sklearn RandomForestRegressor dokumentacja](https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestRegressor.html)
-    - `n_estimators` (val: 100 - 500)  
-    - `max_depth` (val: None; 10-50)  
-    - `max_features` (val: 'auto', 'sqrt', 'log2', None)  
-    - `min_samples_split` (val: 2, 5, 10)  
-    - `min_samples_leaf` (val: 1, 2, 4)  
-    - `bootstrap` (val: True, False)
+
 
 #### **- Ewaluacja modelu**
 - *Przy fine tuningu liczymy RMSE, MAE, R²*

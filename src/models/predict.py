@@ -139,42 +139,17 @@ def predict_batch(
     print("Engineering features...")
     test_df = engineer_features(test_df, is_training=False)
     
-    # Load model first to avoid unnecessary processing if model doesn't exist
+    # Load model
     print(f"Loading model from {model_path}")
     model = load_model(model_path)
     
-    # Get the expected features by loading and processing training data the same way
-    print("Loading training data structure for feature alignment...")
-    train_df = pd.read_csv(featured_data_path)
+    # Get model features from training data
+    print("Aligning features with training data...")
+    model_features = get_model_features(featured_data_path)
     
-    # Remove SalePrice and Id if they exist
-    if 'SalePrice' in train_df.columns:
-        train_df = train_df.drop(columns=['SalePrice'])
-    if 'Id' in train_df.columns:
-        train_df = train_df.drop(columns=['Id'])
-    
-    # Align categorical columns BEFORE one-hot encoding
-    # This ensures both datasets have the same categorical values
-    categorical_columns = test_df.select_dtypes(include=['object']).columns.tolist()
-    
-    for col in categorical_columns:
-        if col in train_df.columns:
-            # Get all unique values from training data
-            train_categories = set(train_df[col].unique())
-            test_categories = set(test_df[col].unique())
-            
-            # If test has categories not in train, map them to most common
-            if test_categories - train_categories:
-                most_common = train_df[col].mode()[0] if len(train_df[col].mode()) > 0 else train_df[col].iloc[0]
-                test_df[col] = test_df[col].apply(lambda x: x if x in train_categories else most_common)
-    
-    # One-hot encode both datasets
+    # One-hot encode the test data
     print("One-hot encoding categorical features...")
-    train_encoded = pd.get_dummies(train_df)
     test_encoded = pd.get_dummies(test_df)
-    
-    # Get the feature names that the model expects
-    model_features = train_encoded.columns.tolist()
     
     # Align test data with model features
     missing_cols = set(model_features) - set(test_encoded.columns)

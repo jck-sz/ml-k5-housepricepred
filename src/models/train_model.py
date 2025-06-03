@@ -147,14 +147,14 @@ def train_model_with_tuning(
     print(f"\nValidation Set Performance:")
     print(f"RMSE: ${rmse:,.2f}")
     print(f"MAE: ${mae:,.2f}")
-    print(f"R² Score: {r2:.4f}")
+    print(f"R-squared Score: {r2:.4f}")
     print(f"MAPE: {mape:.2f}%")
     
     # Get cross-validation scores
     cv_metrics = evaluate_model(model, X_train, y_train)
     print(f"\nCross-Validation Performance (5-fold):")
     print(f"CV RMSE: ${cv_metrics['cv_rmse_mean']:,.2f} (+/- ${cv_metrics['cv_rmse_std']:,.2f})")
-    print(f"CV R²: {cv_metrics['cv_r2_mean']:.4f} (+/- {cv_metrics['cv_r2_std']:.4f})")
+    print(f"CV R-squared: {cv_metrics['cv_r2_mean']:.4f} (+/- {cv_metrics['cv_r2_std']:.4f})")
     
     # Feature importance
     feature_importance = pd.DataFrame({

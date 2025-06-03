@@ -1,5 +1,6 @@
 import streamlit as st
 import pandas as pd
+import numpy as np
 import joblib
 import os
 import sys
@@ -9,19 +10,6 @@ import json
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "../")))
 from src.features.build_features import engineer_features
 from src.data_preprocessing.preprocess import clean_data
-
-# Define the list of features we'll accept from the user
-# Expanded to include more important features
-REQUIRED_FEATURES = [
-    "OverallQual", "GrLivArea", "GarageCars", "TotalBsmtSF", 
-    "FullBath", "YearBuilt", "Neighborhood", "HouseStyle"
-]
-
-ADDITIONAL_FEATURES = [
-    "OverallCond", "LotArea", "BedroomAbvGr", "YearRemodAdd",
-    "1stFlrSF", "2ndFlrSF", "BsmtFullBath", "HalfBath",
-    "Fireplaces", "WoodDeckSF", "OpenPorchSF", "GarageArea"
-]
 
 # Load the trained model
 @st.cache_resource
@@ -53,8 +41,7 @@ def get_model_features():
 def get_categorical_values():
     df = pd.read_csv("datasets/ames-train.csv")
     return {
-        'Neighborhood': sorted(df['Neighborhood'].dropna().unique()),
-        'HouseStyle': sorted(df['HouseStyle'].dropna().unique())
+        'Neighborhood': sorted(df['Neighborhood'].dropna().unique())
     }
 
 # Prepare user input for prediction
@@ -62,79 +49,17 @@ def prepare_input_for_prediction(user_input, model_features):
     # Create DataFrame from user input
     df = pd.DataFrame([user_input])
     
-    # Fill missing numerical features with reasonable defaults
-    numerical_defaults = {
-        'LotFrontage': 65,
-        'MasVnrArea': 0,
-        'BsmtFinSF1': 0,
-        'BsmtFinSF2': 0,
-        'BsmtUnfSF': 0,
-        'BsmtHalfBath': 0,
-        'KitchenAbvGr': 1,
-        'TotRmsAbvGrd': 7,
-        'GarageYrBlt': user_input.get('YearBuilt', 2000),
-        'EnclosedPorch': 0,
-        '3SsnPorch': 0,
-        'ScreenPorch': 0,
-        'PoolArea': 0,
-        'MiscVal': 0,
-        'LowQualFinSF': 0
-    }
-    
-    # Fill missing values
-    for col, default_val in numerical_defaults.items():
-        if col not in df.columns:
-            df[col] = default_val
-    
-    # Add required categorical defaults
-    categorical_defaults = {
-        'MSZoning': 'RL',
-        'Street': 'Pave',
-        'LotShape': 'Reg',
-        'LandContour': 'Lvl',
-        'Utilities': 'AllPub',
-        'LotConfig': 'Inside',
-        'LandSlope': 'Gtl',
-        'Condition1': 'Norm',
-        'Condition2': 'Norm',
-        'BldgType': '1Fam',
-        'RoofStyle': 'Gable',
-        'RoofMatl': 'CompShg',
-        'ExterQual': 'TA',
-        'ExterCond': 'TA',
-        'Foundation': 'PConc',
-        'BsmtQual': 'TA',
-        'BsmtCond': 'TA',
-        'BsmtExposure': 'No',
-        'BsmtFinType1': 'Unf',
-        'BsmtFinType2': 'Unf',
-        'Heating': 'GasA',
-        'HeatingQC': 'Ex',
-        'CentralAir': 'Y',
-        'Electrical': 'SBrkr',
-        'KitchenQual': 'TA',
-        'Functional': 'Typ',
-        'GarageType': 'Attchd',
-        'GarageFinish': 'Unf',
-        'GarageQual': 'TA',
-        'GarageCond': 'TA',
-        'PavedDrive': 'Y',
-        'SaleType': 'WD',
-        'SaleCondition': 'Normal'
-    }
-    
-    for col, default_val in categorical_defaults.items():
-        if col not in df.columns:
-            df[col] = default_val
-    
-    # Add YrSold and MoSold (current date)
-    df['YrSold'] = 2010  # Default sale year
-    df['MoSold'] = 6     # Default sale month
+    # Add any missing columns with reasonable defaults
+    # These are columns needed for feature engineering but not shown in UI
+    if 'YrSold' not in df.columns:
+        df['YrSold'] = 2010  # Default sale year
+    if 'MoSold' not in df.columns:
+        df['MoSold'] = 6     # Default sale month
     
     # Clean data (handle any remaining missing values)
     df = clean_data(df)
     
-    # Engineer features
+    # Engineer features (this adds our 10 new features)
     df = engineer_features(df, is_training=False)
     
     # One-hot encode
@@ -153,7 +78,6 @@ def prepare_input_for_prediction(user_input, model_features):
 st.set_page_config(page_title="House Price Predictor", page_icon="🏠", layout="wide")
 
 st.title("🏠 House Price Prediction App")
-st.markdown("*Powered by Machine Learning with Feature Engineering*")
 
 # Load model and metadata
 model = load_model()
@@ -169,12 +93,15 @@ if model and metadata:
     st.sidebar.info(f"**R² Score:** {metadata['metrics']['validation']['r2']:.3f}")
     
     # Show top features
-    st.sidebar.header("🔝 Top 5 Important Features")
-    for i, feat in enumerate(metadata['top_features'][:5]):
-        st.sidebar.text(f"{i+1}. {feat['feature']}: {feat['importance']:.3f}")
+    st.sidebar.header("🔝 Top Important Features")
+    if 'top_features' in metadata:
+        for i, feat in enumerate(metadata['top_features'][:5]):
+            st.sidebar.text(f"{i+1}. {feat['feature']}: {feat['importance']:.3f}")
 
 # Main content
-st.write("Enter the house features below to predict its sale price:")
+st.write("Enter the house characteristics below to predict its sale price:")
+st.write("Due to the dataset used, the prediction is most accurate for houses in the Ames, Iowa area.")
+st.write("Unfortunately, the surface area is measured in Freedom Units, commonly known as Square Feet, so you might have to use a calculator.")
 
 # Create two columns for input
 col1, col2 = st.columns(2)
@@ -195,10 +122,7 @@ with col1:
                                min_value=1870, max_value=2025, value=1990)
     neighborhood = st.selectbox("Neighborhood", 
                               options=cat_values['Neighborhood'],
-                              index=cat_values['Neighborhood'].index('NAmes') if 'NAmes' in cat_values['Neighborhood'] else 0)
-    house_style = st.selectbox("House Style", 
-                             options=cat_values['HouseStyle'],
-                             index=cat_values['HouseStyle'].index('1Story') if '1Story' in cat_values['HouseStyle'] else 0)
+                              index=0)
 
 with col2:
     st.subheader("Additional Features")
@@ -219,6 +143,7 @@ with col2:
     with st.expander("More Features (Optional)"):
         bsmt_full_bath = st.selectbox("Basement Full Bathrooms", options=[0, 1, 2], index=0)
         half_bath = st.selectbox("Half Bathrooms", options=[0, 1, 2], index=0)
+        bsmt_half_bath = st.selectbox("Basement Half Bathrooms", options=[0, 1], index=0)
         fireplaces = st.selectbox("Number of Fireplaces", options=[0, 1, 2, 3], index=0)
         wood_deck_sf = st.number_input("Wood Deck Area (sq ft)", min_value=0, max_value=1000, value=0)
         open_porch_sf = st.number_input("Open Porch Area (sq ft)", min_value=0, max_value=500, value=0)
@@ -227,44 +152,136 @@ with col2:
 # Add some spacing
 st.markdown("---")
 
+# Show calculated features
+with st.expander("🔧 See Calculated Features"):
+    total_sf = total_bsmt_sf + first_flr_sf + second_flr_sf
+    total_bathrooms = full_bath + 0.5 * half_bath + bsmt_full_bath + 0.5 * bsmt_half_bath
+    house_age = 2010 - year_built  # Assuming 2010 sale year
+    quality_score = overall_qual * overall_cond
+    garage_capacity = garage_cars + (garage_area / 200)
+    recent_remodel = 1 if (2010 - year_remod_add) < 10 else 0
+    
+    col1, col2 = st.columns(2)
+    with col1:
+        st.write(f"**Total Square Footage:** {total_sf:,} sq ft")
+        st.write(f"**Total Bathrooms:** {total_bathrooms}")
+        st.write(f"**House Age:** {house_age} years")
+        st.write(f"**Quality Score:** {quality_score}")
+        st.write(f"**Quality × Living Area:** {overall_qual * gr_liv_area:,}")
+    with col2:
+        st.write(f"**Garage Capacity Score:** {garage_capacity:.2f}")
+        st.write(f"**Has Basement:** {'Yes' if total_bsmt_sf > 0 else 'No'}")
+        st.write(f"**Has Second Floor:** {'Yes' if second_flr_sf > 0 else 'No'}")
+        st.write(f"**Recently Remodeled:** {'Yes' if recent_remodel else 'No'}")
+        st.write(f"**Lot Area (log):** {np.log1p(lot_area):.2f}")
+
 # Prediction button
 if st.button("🎯 Predict House Price", type="primary"):
     if model:
-        # Prepare input data
+        # Prepare input data - include all the fields needed for feature engineering
         input_data = {
-            # Primary features
-            "OverallQual": overall_qual,
-            "GrLivArea": gr_liv_area,
-            "GarageCars": garage_cars,
-            "TotalBsmtSF": total_bsmt_sf,
-            "FullBath": full_bath,
-            "YearBuilt": year_built,
-            "Neighborhood": neighborhood,
-            "HouseStyle": house_style,
-            # Additional features
-            "OverallCond": overall_cond,
-            "LotArea": lot_area,
-            "BedroomAbvGr": bedroom_abvgr,
-            "YearRemodAdd": year_remod_add,
-            "1stFlrSF": first_flr_sf,
-            "2ndFlrSF": second_flr_sf,
-            "BsmtFullBath": bsmt_full_bath,
-            "HalfBath": half_bath,
-            "Fireplaces": fireplaces,
-            "WoodDeckSF": wood_deck_sf,
-            "OpenPorchSF": open_porch_sf,
-            "GarageArea": garage_area,
-            # Add calculated MSSubClass based on house style
-            "MSSubClass": 60 if '2Story' in house_style else 20,
-            "KitchenAbvGr": 1,
-            "TotRmsAbvGrd": 7
+            # Size features
+            'TotalBsmtSF': total_bsmt_sf,
+            '1stFlrSF': first_flr_sf,
+            '2ndFlrSF': second_flr_sf,
+            'GrLivArea': gr_liv_area,
+            'LotArea': lot_area,
+            
+            # Quality features
+            'OverallQual': overall_qual,
+            'OverallCond': overall_cond,
+            
+            # Year features
+            'YearBuilt': year_built,
+            'YearRemodAdd': year_remod_add,
+            'YrSold': 2010,  # Default sale year
+            
+            # Bathroom features
+            'FullBath': full_bath,
+            'HalfBath': half_bath,
+            'BsmtFullBath': bsmt_full_bath,
+            'BsmtHalfBath': bsmt_half_bath,
+            
+            # Garage features
+            'GarageCars': garage_cars,
+            'GarageArea': garage_area,
+            
+            # Categorical features
+            'Neighborhood': neighborhood,
+            
+            # Additional features that might be needed
+            'BedroomAbvGr': bedroom_abvgr,
+            'Fireplaces': fireplaces,
+            'WoodDeckSF': wood_deck_sf,
+            'OpenPorchSF': open_porch_sf,
+            
+            # Default values for other common categorical features
+            'MSZoning': 'RL',
+            'Street': 'Pave',
+            'LotShape': 'Reg',
+            'LandContour': 'Lvl',
+            'LotConfig': 'Inside',
+            'LandSlope': 'Gtl',
+            'BldgType': '1Fam',
+            'HouseStyle': '1Story',
+            'RoofStyle': 'Gable',
+            'ExterQual': 'TA',
+            'ExterCond': 'TA',
+            'Foundation': 'PConc',
+            'BsmtQual': 'TA' if total_bsmt_sf > 0 else 'NA',
+            'BsmtCond': 'TA' if total_bsmt_sf > 0 else 'NA',
+            'BsmtExposure': 'No' if total_bsmt_sf > 0 else 'NA',
+            'BsmtFinType1': 'Unf' if total_bsmt_sf > 0 else 'NA',
+            'Heating': 'GasA',
+            'HeatingQC': 'Ex',
+            'CentralAir': 'Y',
+            'Electrical': 'SBrkr',
+            'KitchenQual': 'TA',
+            'Functional': 'Typ',
+            'GarageType': 'Attchd' if garage_cars > 0 else 'NA',
+            'GarageFinish': 'Unf' if garage_cars > 0 else 'NA',
+            'GarageQual': 'TA' if garage_cars > 0 else 'NA',
+            'GarageCond': 'TA' if garage_cars > 0 else 'NA',
+            'PavedDrive': 'Y',
+            'SaleType': 'WD',
+            'SaleCondition': 'Normal',
+            'MSSubClass': 20,  # Default to 1-story
+            'Utilities': 'AllPub',
+            'Condition1': 'Norm',
+            'Condition2': 'Norm',
+            'RoofMatl': 'CompShg',
+            'Exterior1st': 'VinylSd',
+            'Exterior2nd': 'VinylSd',
+            'MasVnrType': 'None',
+            'MasVnrArea': 0,
+            'BsmtFinSF1': 0,
+            'BsmtFinType2': 'Unf' if total_bsmt_sf > 0 else 'NA',
+            'BsmtFinSF2': 0,
+            'BsmtUnfSF': total_bsmt_sf,
+            'LowQualFinSF': 0,
+            'KitchenAbvGr': 1,
+            'TotRmsAbvGrd': 7,
+            'GarageYrBlt': year_built,
+            'EnclosedPorch': 0,
+            '3SsnPorch': 0,
+            'ScreenPorch': 0,
+            'PoolArea': 0,
+            'PoolQC': 'NA',
+            'Fence': 'NA',
+            'MiscFeature': 'NA',
+            'MiscVal': 0,
+            'MoSold': 6,  # Default to June
+            'Alley': 'NA',
+            'LotFrontage': 65,  # Default value
+            'FireplaceQu': 'Gd' if fireplaces > 0 else 'NA'
         }
         
         # Get model features
         model_features = get_model_features()
         
         # Prepare input
-        prepared_input = prepare_input_for_prediction(input_data, model_features)
+        with st.spinner('Calculating prediction...'):
+            prepared_input = prepare_input_for_prediction(input_data, model_features)
         
         # Make prediction
         prediction = model.predict(prepared_input)[0]
@@ -290,22 +307,10 @@ if st.button("🎯 Predict House Price", type="primary"):
                 upper_bound = prediction + rmse
                 st.metric(label="📊 Confidence Range", 
                          value=f"${lower_bound:,.0f} - ${upper_bound:,.0f}")
-        
-        # Feature summary
-        st.markdown("### 📋 House Summary")
-        col_sum1, col_sum2 = st.columns(2)
-        
-        with col_sum1:
-            st.write(f"**Total Square Footage:** {first_flr_sf + second_flr_sf + total_bsmt_sf:,} sq ft")
-            st.write(f"**House Age:** {2010 - year_built} years")
-            st.write(f"**Quality Score:** {overall_qual * overall_cond}")
-        
-        with col_sum2:
-            st.write(f"**Total Bathrooms:** {full_bath + 0.5 * half_bath + bsmt_full_bath}")
-            st.write(f"**Garage Space:** {garage_cars} cars ({garage_area} sq ft)")
-            st.write(f"**Outdoor Space:** {wood_deck_sf + open_porch_sf} sq ft")
 
 # Footer
 st.markdown("---")
-st.markdown("*Note: This prediction is based on historical data and machine learning models. "
-           "Actual prices may vary based on market conditions and other factors.*")
+st.markdown(
+    "*Disclaimer of Grand Prognostication: The aforementioned predictive output, herein referred to as the 'Estimation Artifact,' is derived via arcane computational rituals involving historical datasets and algorithmic sorcery commonly labeled 'machine learning.'*\n\n"
+    "*By proceeding to view or otherwise engage with said Estimation Artifact, the user (henceforth 'You, the Valued Price Enthusiast') acknowledges, accepts, and spiritually aligns with the cosmic truth that actual housing prices may diverge wildly, chaotically, and with reckless abandon from any numbers herein conjured—due to, but not limited to, market whimsy, acts of bureaucracy, lunar phases, interest rate voodoo, and the capricious decisions of financial deities.*"
+)

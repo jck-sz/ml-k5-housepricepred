@@ -50,7 +50,7 @@ This project predicts house prices using the Ames, Iowa housing dataset. It incl
 1. **Set up your virtual environment**
    ```bash
    python -m venv .venv
-   .venv\Scripts\activate   # or source .venv/bin/activate on macOS/Linux
+   .venv\Scripts\Activate.ps1   # or source .venv/bin/activate on macOS/Linux
    ```
 
 2. **Install dependencies**
@@ -68,37 +68,26 @@ This project predicts house prices using the Ames, Iowa housing dataset. It incl
    python src/models/train_model.py
    ```
 
-5. **OPTIONAL --- Run predictions --- OPTIONAL**
-   ```bash
-   python src/models/predict.py
-   ```
-
-   Inside `predict.py`, modify the `example_input` dictionary to try different house attributes:
-   ```python
-   example_input = {
-       "OverallQual": 7,
-       "GrLivArea": 1710,
-       "GarageCars": 2,
-       "TotalBsmtSF": 856,
-       "FullBath": 2,
-       "YearBuilt": 2003,
-       "Neighborhood": "CollgCr",
-       "HouseStyle": "2Story"
-   }
-   ```
-
-6. **Launch the app**
+5. **Launch the app**
    ```bash
    streamlit run app/app.py
    ```
 
    The Streamlit app provides a simple form to enter house details and view the predicted price. Make sure the trained model (`house_price_model.pkl`) and the cleaned dataset (`ames-train-clean.csv`) are available in the expected folders before running the app.
 
+6. **--- ALTERNATIVELY : run all in one go---**
+   ```bash
+   python run_all.py
+   ```
 ---
 
 ## 👥 Contributors
 
-- Team members' names here
+- Jacek Szlączka
+- Marcin Michalak
+- 
+- 
+- 
 
 ---
 
@@ -112,8 +101,7 @@ This project predicts house prices using the Ames, Iowa housing dataset. It incl
 
 ## 🚧 TODOs
 
-- Implement feature engineering (`build_features.py`)
-- Update frontend interface to include more features (`app.py`)
+- Data visualization options (prediction value vs test dataset values)
 - Add unit tests under `tests/`
 - Optionally switch to `LinearRegression` model for simplicity or a different more advanced model (?)
 - Prepare final submission script to predict on `ames-test.csv`
