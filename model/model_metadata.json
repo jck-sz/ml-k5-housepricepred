@@ -1,5 +1,5 @@
 {
-    "training_date": "2025-06-03 12:19:03",
+    "training_date": "2025-06-03 15:39:00",
     "model_type": "RandomForestRegressor",
     "parameters": {
         "bootstrap": false,
@@ -12,7 +12,7 @@
     "metrics": {
         "validation": {
             "rmse": 24488.079646990995,
-            "mae": 14863.851562383004,
+            "mae": 14863.851562383,
             "r2": 0.8974884514490846,
             "mape": 8.828835643954475
         },
@@ -20,7 +20,7 @@
             "cv_rmse_mean": 27654.458606886656,
             "cv_rmse_std": 4943.800937791053,
             "cv_r2_mean": 0.8783840857346457,
-            "cv_r2_std": 0.028541549536262173
+            "cv_r2_std": 0.0285415495362622
         },
         "n_samples_train": 1168,
         "n_samples_val": 292,

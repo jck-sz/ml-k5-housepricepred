@@ -94,14 +94,13 @@ This project predicts house prices using the Ames, Iowa housing dataset. It incl
 ## 📌 Notes
 
 - All model artifacts and logs are excluded from Git using `.gitignore`.
-- Cleaned data is stored under `datasets/processed/`.
-- Logging output (e.g., imputation details) goes to `logs/preprocess.log`.
+- Cleaned data is stored in `datasets/processed/`.
+- Logging output (e.g., missing data imputs) goes to `logs/preprocess.log`.
 
 ---
 
 ## 🚧 TODOs
 
-- Data visualization options (prediction value vs test dataset values)
-- Add unit tests under `tests/`
-- Optionally switch to `LinearRegression` model for simplicity or a different more advanced model (?)
-- Prepare final submission script to predict on `ames-test.csv`
+- Add unit tests under `tests/` *Optional*
+- Optionally switch to `LinearRegression` model for simplicity or a different more advanced model *Optional*
+- Prepare final submission script to predict on `ames-test.csv` *Optional*

@@ -1,0 +1,64 @@
+MODEL EVALUATION REPORT
+======================
+
+Date: 2025-06-03 15:54:39
+
+OVERALL PERFORMANCE METRICS
+---------------------------
+RMSE (Root Mean Squared Error):     $24,488.08
+MAE (Mean Absolute Error):          $14,863.85
+R-squared Score:                    0.8975
+MAPE (Mean Abs Percentage Error):   8.83%
+Mean Error (Bias):                  $-932.04
+Std Dev of Errors:                  $24,470.34
+Maximum Absolute Error:             $173,199.15
+Minimum Absolute Error:             $14.96
+
+VALIDATION SET SUMMARY
+----------------------
+Number of Houses:         292
+Actual Price Range:       $39,300 - $555,000
+Predicted Price Range:    $65,589 - $428,030
+Mean Actual Price:        $178,356
+Mean Predicted Price:     $177,424
+
+PREDICTION ACCURACY
+-------------------
+Houses within 5% error:   124 (42.5%)
+Houses within 10% error:  207 (70.9%)
+Houses within 15% error:  245 (83.9%)
+
+TOP 5 BEST PREDICTIONS (Lowest % Error)
+----------------------------------------
+  Id   Actual     Predicted  AbsPercentError
+ 676 148500.0 148514.963750         0.010077
+ 266 175500.0 175462.825000         0.021182
+ 920 176500.0 176456.284028         0.024768
+1065 154000.0 153925.562897         0.048336
+1221 115000.0 115110.522154         0.096106
+
+TOP 5 WORST PREDICTIONS (Highest % Error)
+------------------------------------------
+  Id   Actual     Predicted  AbsPercentError
+ 711  52000.0  93293.840714        79.411232
+ 534  39300.0  65589.080000        66.893333
+1187  95000.0 143607.355000        51.165637
+1381  58500.0  86557.175000        47.960983
+ 689 392000.0 218800.846667        44.183457
+
+PRICE RANGE ANALYSIS
+--------------------
+                 mean  count
+PriceRange                  
+<$100k      23.635701     31
+$100-150k    7.300313     92
+$150-200k    5.305569     85
+$200-250k    7.511346     46
+$250-300k    8.445958     17
+>$300k      11.124186     21
+
+INTERPRETATION
+--------------
+- An R-squared of 0.897 means the model explains 89.7% of the variance in house prices
+- The average prediction error is $14,864 or 8.8% of the house price
+- The model slightly underestimates prices on average by $932

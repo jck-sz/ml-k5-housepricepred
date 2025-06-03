@@ -16,9 +16,6 @@ model/*.joblib
 # Dataset outputs
 datasets/processed/
 
-# Predictions
-predictions/
-
 # Jupyter Notebooks (if ever added)
 .ipynb_checkpoints/
 

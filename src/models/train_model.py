@@ -136,28 +136,45 @@ def train_model_with_tuning(
     # Make predictions on validation set
     y_pred = model.predict(X_val)
     
-    # Save validation data and predictions for evaluation
-    print("\nSaving validation data for evaluation...")
-    val_results = pd.DataFrame({
-        'Actual': y_val,
-        'Predicted': y_pred,
-        'Error': y_pred - y_val,
-        'PercentError': ((y_pred - y_val) / y_val) * 100
+    # Save validation predictions with IDs
+    print("\nSaving validation predictions...")
+    
+    # Get the validation indices
+    val_indices = X_val.index
+    
+    # Try to get original IDs
+    # First check if we have the original raw data with IDs
+    original_path = "datasets/ames-train.csv"
+    if os.path.exists(original_path):
+        original_raw = pd.read_csv(original_path)
+        if 'Id' in original_raw.columns:
+            # Get IDs based on index
+            val_ids = original_raw.loc[val_indices, 'Id'].values
+        else:
+            # Use index as ID if no Id column
+            val_ids = val_indices + 1  # Adding 1 to make IDs start from 1
+    else:
+        # Fallback: use index as ID
+        val_ids = val_indices + 1
+    
+    # Create predictions dataframe with just Id and Predicted price
+    val_predictions = pd.DataFrame({
+        'Id': val_ids,
+        'SalePrice': y_pred
     })
     
-    # Add the original features for analysis
-    val_results = pd.concat([val_results, X_val.reset_index(drop=True)], axis=1)
-    
-    # Save to CSV
+    # Save predictions
     os.makedirs("evaluation", exist_ok=True)
-    val_results.to_csv("evaluation/validation_predictions.csv", index=False)
-    print(f"   ✓ Validation results saved to evaluation/validation_predictions.csv")
+    val_predictions.to_csv("evaluation/validation_predictions.csv", index=False)
+    print(f"   [OK] Validation predictions saved to evaluation/validation_predictions.csv")
     
-    # Also save just the validation features and actual prices separately
-    val_data = X_val.copy()
-    val_data['SalePrice'] = y_val
-    val_data.to_csv("evaluation/validation_set.csv", index=False)
-    print(f"   ✓ Validation set saved to evaluation/validation_set.csv")
+    # Also save the actual prices for comparison (with IDs)
+    val_actual = pd.DataFrame({
+        'Id': val_ids,
+        'SalePrice': y_val.values
+    })
+    val_actual.to_csv("evaluation/validation_actual.csv", index=False)
+    print(f"   [OK] Validation actual prices saved to evaluation/validation_actual.csv")
     
     # Calculate metrics
     rmse = sqrt(mean_squared_error(y_val, y_pred))
