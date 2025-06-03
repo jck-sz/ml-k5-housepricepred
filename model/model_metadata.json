@@ -1,0 +1,111 @@
+{
+    "training_date": "2025-06-03 15:39:00",
+    "model_type": "RandomForestRegressor",
+    "parameters": {
+        "bootstrap": false,
+        "max_depth": 20,
+        "max_features": "sqrt",
+        "min_samples_leaf": 1,
+        "min_samples_split": 2,
+        "n_estimators": 200
+    },
+    "metrics": {
+        "validation": {
+            "rmse": 24488.079646990995,
+            "mae": 14863.851562383,
+            "r2": 0.8974884514490846,
+            "mape": 8.828835643954475
+        },
+        "cross_validation": {
+            "cv_rmse_mean": 27654.458606886656,
+            "cv_rmse_std": 4943.800937791053,
+            "cv_r2_mean": 0.8783840857346457,
+            "cv_r2_std": 0.0285415495362622
+        },
+        "n_samples_train": 1168,
+        "n_samples_val": 292,
+        "n_features": 298
+    },
+    "top_features": [
+        {
+            "feature": "QualityPriceInteraction",
+            "importance": 0.08809106532860894
+        },
+        {
+            "feature": "OverallQual",
+            "importance": 0.07029342854858361
+        },
+        {
+            "feature": "TotalSF",
+            "importance": 0.06384313606931001
+        },
+        {
+            "feature": "GrLivArea",
+            "importance": 0.04983904645518508
+        },
+        {
+            "feature": "TotalBsmtSF",
+            "importance": 0.040189204706414655
+        },
+        {
+            "feature": "GarageCapacity",
+            "importance": 0.03733433686558807
+        },
+        {
+            "feature": "GarageArea",
+            "importance": 0.03592162798675878
+        },
+        {
+            "feature": "GarageCars",
+            "importance": 0.03473312210882408
+        },
+        {
+            "feature": "1stFlrSF",
+            "importance": 0.03002742043803643
+        },
+        {
+            "feature": "OverallQualityScore",
+            "importance": 0.02843949718735801
+        },
+        {
+            "feature": "YearBuilt",
+            "importance": 0.027623949673701395
+        },
+        {
+            "feature": "TotalBathrooms",
+            "importance": 0.025373715144019305
+        },
+        {
+            "feature": "ExterQual_TA",
+            "importance": 0.025336049147029492
+        },
+        {
+            "feature": "BsmtQual_Ex",
+            "importance": 0.02443471752091754
+        },
+        {
+            "feature": "HouseAge",
+            "importance": 0.022117666800930323
+        },
+        {
+            "feature": "2ndFlrSF",
+            "importance": 0.01968063636153157
+        },
+        {
+            "feature": "BsmtFinSF1",
+            "importance": 0.019267579902021506
+        },
+        {
+            "feature": "FullBath",
+            "importance": 0.01826562379914501
+        },
+        {
+            "feature": "LotAreaLog",
+            "importance": 0.014922808495368834
+        },
+        {
+            "feature": "GarageYrBlt",
+            "importance": 0.01480699464090143
+        }
+    ]
+}
