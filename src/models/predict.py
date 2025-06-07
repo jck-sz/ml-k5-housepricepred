@@ -204,8 +204,7 @@ def main():
     """Main function to run predictions."""
     # Default paths
     model_path = "model/house_price_model.pkl"
-    metadata_path = "model/model_metadata.json"
-    test_file_path = "datasets/ames-test.csv"
+    metadata_path = "model/model_metadata.json"    
     output_path = "predictions/test_predictions.csv"
     
     # Check if model exists
@@ -228,7 +227,7 @@ def main():
     
     # Check if test file exists
     if not os.path.exists(test_file_path):
-        print(f"\nTest file not found at {test_file_path}")
+        print(f"\nYou must use --input and --output flags to specify the files.")
         print("Please ensure the test dataset is in the correct location.")
         return
     

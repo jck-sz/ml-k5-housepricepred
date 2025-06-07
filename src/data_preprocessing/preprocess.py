@@ -88,12 +88,4 @@ if __name__ == "__main__":
         output_path="datasets/processed/ames-train-featured.csv",
         is_training=True
     )
-    
-    # Process test data (if it exists)
-    if os.path.exists("datasets/ames-test.csv"):
-        test_featured = preprocess_pipeline(
-            input_path="datasets/ames-test.csv",
-            output_path="datasets/processed/ames-test-featured.csv",
-            is_training=False
-        )
-        logger.info("Both training and test data processed successfully")
+    logger.info("Training data processed successfully")
