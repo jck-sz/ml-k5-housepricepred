@@ -15,7 +15,7 @@ This project predicts house prices using the Ames, Iowa housing dataset. It incl
 │   ├── processed/           # Output of cleaned data
 │   │   └── ames-train-clean.csv
 │   ├── ames-train.csv       # Raw training dataset
-│   ├── ames-test.csv        # Raw test dataset
+│   ├── ames-test.csv        # Raw test dataset, supposed to be used for Kaggle submission
 │   └── ames-data_description.txt  # Column descriptions from dataset source
 │
 ├── logs/                    # Log files generated during preprocessing
