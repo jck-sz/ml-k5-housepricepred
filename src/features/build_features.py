@@ -4,12 +4,8 @@ import numpy as np
 
 def engineer_features(df, is_training=True):
     """
-<<<<<<< HEAD
     Feature engineering with 10 new features.
-=======
-    Simplified feature engineering with only 10 essential features.
->>>>>>> origin/master
-    
+ 
     Parameters:
     df (pd.DataFrame): Input dataframe with house data
     is_training (bool): Whether this is training data (has SalePrice)
@@ -21,34 +17,22 @@ def engineer_features(df, is_training=True):
     df_featured = df.copy()
     
     # 1. TotalSF: Total Square Footage (basement + 1st floor + 2nd floor)
-<<<<<<< HEAD
     # This captures the overall size of the house
-=======
-    # This captures the overall size of the house - typically the strongest predictor
->>>>>>> origin/master
+
     df_featured['TotalSF'] = (
         df_featured['TotalBsmtSF'].fillna(0) + 
         df_featured['1stFlrSF'].fillna(0) + 
         df_featured['2ndFlrSF'].fillna(0)
     )
     
-<<<<<<< HEAD
     # 2. OverallQualityScore: Quality * Condition
     # Combines material quality and condition into one metric
-=======
-    # 2. OverallQualityScore: Quality × Condition
-    # Combines material quality and condition into one powerful metric
->>>>>>> origin/master
     df_featured['OverallQualityScore'] = (
         df_featured['OverallQual'] * df_featured['OverallCond']
     )
     
     # 3. HouseAge: How old was the house when sold
-<<<<<<< HEAD
     # Newer houses are typically more expensive
-=======
-    # Newer houses typically command higher prices
->>>>>>> origin/master
     df_featured['HouseAge'] = df_featured['YrSold'] - df_featured['YearBuilt']
     
     # 4. TotalBathrooms: All bathrooms combined (full + 0.5 * half)
@@ -83,11 +67,7 @@ def engineer_features(df, is_training=True):
     # Reduces impact of outliers and captures diminishing returns
     df_featured['LotAreaLog'] = np.log1p(df_featured['LotArea'])
     
-<<<<<<< HEAD
     # 9. QualityPriceInteraction: Quality * Living Area
-=======
-    # 9. QualityPriceInteraction: Quality × Living Area
->>>>>>> origin/master
     # High quality matters more in larger homes
     df_featured['QualityPriceInteraction'] = (
         df_featured['OverallQual'] * df_featured['GrLivArea']
