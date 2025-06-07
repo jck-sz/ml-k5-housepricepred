@@ -4,7 +4,7 @@ import numpy as np
 
 def engineer_features(df, is_training=True):
     """
-    Simplified feature engineering with only 10 essential features.
+    Feature engineering with 10 new features.
     
     Parameters:
     df (pd.DataFrame): Input dataframe with house data
@@ -17,21 +17,21 @@ def engineer_features(df, is_training=True):
     df_featured = df.copy()
     
     # 1. TotalSF: Total Square Footage (basement + 1st floor + 2nd floor)
-    # This captures the overall size of the house - typically the strongest predictor
+    # This captures the overall size of the house
     df_featured['TotalSF'] = (
         df_featured['TotalBsmtSF'].fillna(0) + 
         df_featured['1stFlrSF'].fillna(0) + 
         df_featured['2ndFlrSF'].fillna(0)
     )
     
-    # 2. OverallQualityScore: Quality × Condition
-    # Combines material quality and condition into one powerful metric
+    # 2. OverallQualityScore: Quality * Condition
+    # Combines material quality and condition into one metric
     df_featured['OverallQualityScore'] = (
         df_featured['OverallQual'] * df_featured['OverallCond']
     )
     
     # 3. HouseAge: How old was the house when sold
-    # Newer houses typically command higher prices
+    # Newer houses are typically more expensive
     df_featured['HouseAge'] = df_featured['YrSold'] - df_featured['YearBuilt']
     
     # 4. TotalBathrooms: All bathrooms combined (full + 0.5 * half)
@@ -66,7 +66,7 @@ def engineer_features(df, is_training=True):
     # Reduces impact of outliers and captures diminishing returns
     df_featured['LotAreaLog'] = np.log1p(df_featured['LotArea'])
     
-    # 9. QualityPriceInteraction: Quality × Living Area
+    # 9. QualityPriceInteraction: Quality * Living Area
     # High quality matters more in larger homes
     df_featured['QualityPriceInteraction'] = (
         df_featured['OverallQual'] * df_featured['GrLivArea']
