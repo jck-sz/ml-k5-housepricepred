@@ -1,64 +1,64 @@
 MODEL EVALUATION REPORT
 ======================
 
-Date: 2025-06-03 15:54:39
+Date: 2025-06-10 21:23:25
 
 OVERALL PERFORMANCE METRICS
 ---------------------------
-RMSE (Root Mean Squared Error):     $24,488.08
-MAE (Mean Absolute Error):          $14,863.85
-R-squared Score:                    0.8975
-MAPE (Mean Abs Percentage Error):   8.83%
-Mean Error (Bias):                  $-932.04
-Std Dev of Errors:                  $24,470.34
-Maximum Absolute Error:             $173,199.15
-Minimum Absolute Error:             $14.96
+RMSE (Root Mean Squared Error):     $19,299.69
+MAE (Mean Absolute Error):          $13,423.84
+R-squared Score:                    0.9049
+MAPE (Mean Abs Percentage Error):   8.37%
+Mean Error (Bias):                  $1,365.76
+Std Dev of Errors:                  $19,251.30
+Maximum Absolute Error:             $74,452.53
+Minimum Absolute Error:             $41.99
 
 VALIDATION SET SUMMARY
 ----------------------
-Number of Houses:         292
-Actual Price Range:       $39,300 - $555,000
-Predicted Price Range:    $65,589 - $428,030
-Mean Actual Price:        $178,356
-Mean Predicted Price:     $177,424
+Number of Houses:         285
+Actual Price Range:       $39,300 - $380,000
+Predicted Price Range:    $66,131 - $322,509
+Mean Actual Price:        $173,485
+Mean Predicted Price:     $174,851
 
 PREDICTION ACCURACY
 -------------------
-Houses within 5% error:   124 (42.5%)
-Houses within 10% error:  207 (70.9%)
-Houses within 15% error:  245 (83.9%)
+Houses within 5% error:   130 (45.6%)
+Houses within 10% error:  211 (74.0%)
+Houses within 15% error:  243 (85.3%)
 
 TOP 5 BEST PREDICTIONS (Lowest % Error)
 ----------------------------------------
-  Id   Actual     Predicted  AbsPercentError
- 676 148500.0 148514.963750         0.010077
- 266 175500.0 175462.825000         0.021182
- 920 176500.0 176456.284028         0.024768
-1065 154000.0 153925.562897         0.048336
-1221 115000.0 115110.522154         0.096106
+  Id  Actual     Predicted  AbsPercentError
+  51  177000 176958.012678         0.023722
+ 854  157000 156896.267541         0.066072
+1037  178000 177766.711363         0.131061
+ 275  244600 244014.803856         0.239246
+ 911  239799 240417.060217         0.257741
 
 TOP 5 WORST PREDICTIONS (Highest % Error)
 ------------------------------------------
-  Id   Actual     Predicted  AbsPercentError
- 711  52000.0  93293.840714        79.411232
- 534  39300.0  65589.080000        66.893333
-1187  95000.0 143607.355000        51.165637
-1381  58500.0  86557.175000        47.960983
- 689 392000.0 218800.846667        44.183457
+  Id  Actual     Predicted  AbsPercentError
+ 689   52000  89184.406362        71.508474
+ 517   39300  66131.170350        68.272698
+1416   84500 141419.729827        67.360627
+1033   90000 146690.711852        62.989680
+ 644  110000 158688.161401        44.261965
 
 PRICE RANGE ANALYSIS
 --------------------
                  mean  count
 PriceRange                  
-<$100k      23.635701     31
-$100-150k    7.300313     92
-$150-200k    5.305569     85
-$200-250k    7.511346     46
-$250-300k    8.445958     17
->$300k      11.124186     21
+<$100k      23.672038     20
+$100-150k    8.176865    110
+$150-200k    4.946945     78
+$200-250k    7.106668     43
+$250-300k    7.577616     20
+>$300k      12.193865     14
 
 INTERPRETATION
 --------------
-- An R-squared of 0.897 means the model explains 89.7% of the variance in house prices
-- The average prediction error is $14,864 or 8.8% of the house price
-- The model slightly underestimates prices on average by $932
+- An R-squared of 0.905 means the model explains 90.5% of the variance in house prices
+- The average prediction error is $13,424 or 8.4% of the house price
+- The model slightly overestimates prices on average by $1,366

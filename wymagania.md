@@ -26,12 +26,6 @@
     - `min_samples_leaf` (val: 1, 2, 4)  
     - `bootstrap` (val: True, False)
 
-
-
----
-
-### **Do zrobienia:**
-
 #### **- Cel projektu**
 - *Jasno zdefiniować problem*
 
@@ -45,8 +39,6 @@
 
 #### **- Wizualizacja danych**
 - *Wykresy, mapy cieplne, histogramy, wykresy rozrzutu itp.*
-
-
 
 #### **- Ewaluacja modelu**
 - *Przy fine tuningu liczymy RMSE, MAE, R²*
@@ -62,6 +54,10 @@
 - *Interaktywne lub statyczne wizualizacje wyników i wniosków (np. z wykorzystaniem Matplotlib, Seaborn, Plotly, Tableau)*
 - *Wizualizacja działania modelu (np. feature importance, SHAP, LIME, PCA/TSNE do redukcji wymiarowości)*  
   - _(nie mam pojęcia o co chodzi – do doczytania)_
+
+---
+
+### **Do zrobienia:**
 
 #### **- Wnioski i rekomendacje**
 - *Podsumowanie najważniejszych wniosków*

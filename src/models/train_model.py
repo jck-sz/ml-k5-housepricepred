@@ -53,8 +53,55 @@ def evaluate_model(model, X, y, cv=5):
     }
 
 
+def get_datasets(
+    estimators: pd.DataFrame, 
+    targets: pd.DataFrame, 
+    target_column: str, 
+    validation_percentage: float = 0.2,
+    dump: bool = True
+) -> tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame, pd.DataFrame]:
+    """
+    Splits dataset into a training & validation datasets.
+
+    Parameters:
+    - estimators (pd.DataFrame): Dataset's columns to be split.
+    - targets (pd.DataFrame): Dataset's labels to be split.
+    - target_column (str): The name of the column to predict.
+    - validation_percentage (float): How many % of dataset should be dedicated to validation.
+    Should be float between 0.0 and 1.0. Defaults to 0.2 (20 %).
+    - dump (bool): Whether to save created datasets to files for future processing.
+
+    Returns:
+    Dataset split to training and validation parts:
+    - [0]: Estimators (inputs) for training dataset.
+    - [1]: Targets (labels) for training dataset.
+    - [2]: Estimators (inputs) for validation dataset.
+    - [3]: Targets (labels) for validation dataset.
+    """
+    DEST_PATH: str = "datasets/used"
+    TRAINING_DATASET_PATH: str = f"{DEST_PATH}/training.csv"
+    VALIDATION_DATASET_PATH: str = f"{DEST_PATH}/validation.csv"
+    
+    training_estimators, validation_estimators, training_targets, validation_targets = train_test_split(
+        estimators, targets, test_size=validation_percentage, random_state=2137
+    )
+
+    if dump:
+        training: pd.DataFrame = training_estimators.copy()
+        training[target_column] = training_targets
+        training.to_csv(TRAINING_DATASET_PATH, index=False)
+        print(f"Saved training dataset to: {TRAINING_DATASET_PATH}")
+
+        validation: pd.DataFrame = validation_estimators.copy()
+        validation[target_column] = validation_targets
+        validation.to_csv(VALIDATION_DATASET_PATH, index=False)
+        print(f"Saved validation dataset to: {VALIDATION_DATASET_PATH}")
+
+    return training_estimators, validation_estimators, training_targets, validation_targets
+
+
 def train_model_with_tuning(
-    df: pd.DataFrame, 
+    dataset: pd.DataFrame, 
     target_column: str = "SalePrice",
     tune_hyperparameters: bool = True
 ) -> tuple:
@@ -70,24 +117,16 @@ def train_model_with_tuning(
     tuple: (trained_model, best_params, evaluation_metrics, feature_importance)
     """
     print("Starting model training...")
-    
+
     # Separate features (X) and target variable (y)
-    X = df.drop(columns=[target_column])
-    y = df[target_column]
-    
-    # Store feature names before one-hot encoding
-    feature_names = X.columns.tolist()
-    
-    # Convert categorical features to numeric using one-hot encoding
-    X = pd.get_dummies(X)
+    estimators: pd.DataFrame = dataset.drop(columns=[target_column])
+    targets: pd.Series = dataset[target_column]
     
     # Update feature names after one-hot encoding
-    encoded_feature_names = X.columns.tolist()
+    encoded_feature_names = estimators.columns.tolist()
     
     # Split into training and validation sets (80% training, 20% validation)
-    X_train, X_val, y_train, y_val = train_test_split(
-        X, y, test_size=0.2, random_state=2137
-    )
+    X_train, X_val, y_train, y_val = get_datasets(estimators, targets, target_column, dump=True)  
     
     if tune_hyperparameters:
         print("Performing hyperparameter tuning with GridSearchCV...")
@@ -98,7 +137,7 @@ def train_model_with_tuning(
             'n_estimators': [100, 200, 300],
             'max_depth': [10, 20, 30, None],
             'min_samples_split': [2, 5, 10],
-            'min_samples_leaf': [1, 2, 4],
+            'min_samples_leaf': [2, 3, 4],
             'max_features': ['sqrt', 'log2', None],
             'bootstrap': [True, False]
         }
@@ -217,13 +256,13 @@ def train_model_with_tuning(
         'cross_validation': cv_metrics,
         'n_samples_train': len(X_train),
         'n_samples_val': len(X_val),
-        'n_features': X.shape[1]
+        'n_features': estimators.shape[1]
     }
     
     return model, best_params, evaluation_metrics, feature_importance
 
 
-def save_model_and_metadata(model, params, metrics, feature_importance, model_path="model/"):
+def save_model_and_metadata(model, params, metrics, feature_importance: pd.DataFrame, model_path="model/"):
     """
     Save the trained model and associated metadata.
     
@@ -271,16 +310,16 @@ if __name__ == "__main__":
         print("Please run preprocess.py first to generate featured data.")
         exit(1)
     
-    df = load_data(data_path)
+    dataset = load_data(data_path)
     
     # Ensure there are no missing values in the target
-    df = df.dropna(subset=["SalePrice"])
+    dataset = dataset.dropna(subset=["SalePrice"])
     
-    print(f"Loaded featured dataset with shape: {df.shape}")
+    print(f"Loaded featured dataset with shape: {dataset.shape}")
     
     # Train the model with hyperparameter tuning
     model, best_params, metrics, feature_importance = train_model_with_tuning(
-        df, 
+        dataset, 
         tune_hyperparameters=True  # Set to False to skip GridSearchCV
     )
     

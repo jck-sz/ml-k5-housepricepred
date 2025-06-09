@@ -1,0 +1,862 @@
+DATASET SIZE
+------------
+Number of records: 1460
+Number of columns: 81
+
+OVERVIEW
+--------
+category   43 (53.09 %)
+int64      35 (43.21 %)
+float64     3 (3.70 %)
+Null entries: 7829 (6.62 %)
+
+COLUMNS OVERVIEW
+----------------
+Column name          Null entries        Column type
+Id                          0 ( 0.00 %)  int64
+MSSubClass                  0 ( 0.00 %)  int64
+MSZoning                    0 ( 0.00 %)  category
+LotFrontage               259 (17.74 %)  float64
+LotArea                     0 ( 0.00 %)  int64
+Street                      0 ( 0.00 %)  category
+Alley                    1369 (93.77 %)  category
+LotShape                    0 ( 0.00 %)  category
+LandContour                 0 ( 0.00 %)  category
+Utilities                   0 ( 0.00 %)  category
+LotConfig                   0 ( 0.00 %)  category
+LandSlope                   0 ( 0.00 %)  category
+Neighborhood                0 ( 0.00 %)  category
+Condition1                  0 ( 0.00 %)  category
+Condition2                  0 ( 0.00 %)  category
+BldgType                    0 ( 0.00 %)  category
+HouseStyle                  0 ( 0.00 %)  category
+OverallQual                 0 ( 0.00 %)  int64
+OverallCond                 0 ( 0.00 %)  int64
+YearBuilt                   0 ( 0.00 %)  int64
+YearRemodAdd                0 ( 0.00 %)  int64
+RoofStyle                   0 ( 0.00 %)  category
+RoofMatl                    0 ( 0.00 %)  category
+Exterior1st                 0 ( 0.00 %)  category
+Exterior2nd                 0 ( 0.00 %)  category
+MasVnrType                872 (59.73 %)  category
+MasVnrArea                  8 ( 0.55 %)  float64
+ExterQual                   0 ( 0.00 %)  category
+ExterCond                   0 ( 0.00 %)  category
+Foundation                  0 ( 0.00 %)  category
+BsmtQual                   37 ( 2.53 %)  category
+BsmtCond                   37 ( 2.53 %)  category
+BsmtExposure               38 ( 2.60 %)  category
+BsmtFinType1               37 ( 2.53 %)  category
+BsmtFinSF1                  0 ( 0.00 %)  int64
+BsmtFinType2               38 ( 2.60 %)  category
+BsmtFinSF2                  0 ( 0.00 %)  int64
+BsmtUnfSF                   0 ( 0.00 %)  int64
+TotalBsmtSF                 0 ( 0.00 %)  int64
+Heating                     0 ( 0.00 %)  category
+HeatingQC                   0 ( 0.00 %)  category
+CentralAir                  0 ( 0.00 %)  category
+Electrical                  1 ( 0.07 %)  category
+1stFlrSF                    0 ( 0.00 %)  int64
+2ndFlrSF                    0 ( 0.00 %)  int64
+LowQualFinSF                0 ( 0.00 %)  int64
+GrLivArea                   0 ( 0.00 %)  int64
+BsmtFullBath                0 ( 0.00 %)  int64
+BsmtHalfBath                0 ( 0.00 %)  int64
+FullBath                    0 ( 0.00 %)  int64
+HalfBath                    0 ( 0.00 %)  int64
+BedroomAbvGr                0 ( 0.00 %)  int64
+KitchenAbvGr                0 ( 0.00 %)  int64
+KitchenQual                 0 ( 0.00 %)  category
+TotRmsAbvGrd                0 ( 0.00 %)  int64
+Functional                  0 ( 0.00 %)  category
+Fireplaces                  0 ( 0.00 %)  int64
+FireplaceQu               690 (47.26 %)  category
+GarageType                 81 ( 5.55 %)  category
+GarageYrBlt                81 ( 5.55 %)  float64
+GarageFinish               81 ( 5.55 %)  category
+GarageCars                  0 ( 0.00 %)  int64
+GarageArea                  0 ( 0.00 %)  int64
+GarageQual                 81 ( 5.55 %)  category
+GarageCond                 81 ( 5.55 %)  category
+PavedDrive                  0 ( 0.00 %)  category
+WoodDeckSF                  0 ( 0.00 %)  int64
+OpenPorchSF                 0 ( 0.00 %)  int64
+EnclosedPorch               0 ( 0.00 %)  int64
+3SsnPorch                   0 ( 0.00 %)  int64
+ScreenPorch                 0 ( 0.00 %)  int64
+PoolArea                    0 ( 0.00 %)  int64
+PoolQC                   1453 (99.52 %)  category
+Fence                    1179 (80.75 %)  category
+MiscFeature              1406 (96.30 %)  category
+MiscVal                     0 ( 0.00 %)  int64
+MoSold                      0 ( 0.00 %)  int64
+YrSold                      0 ( 0.00 %)  int64
+SaleType                    0 ( 0.00 %)  category
+SaleCondition               0 ( 0.00 %)  category
+SalePrice                   0 ( 0.00 %)  int64
+
+TARGET
+------
+Name        SalePrice
+Type        int64
+Min         $   34,900.00
+Mean        $  180,921.20
+Max         $  755,000.00
+Std. dev    $   79,442.50
+
+Id
+--
+Type                  int64
+Min                           1.00
+Mean                        730.50
+Max                       1,460.00
+Std. dev                    421.61 (57.72 %)
+Non linear Corelation        -0.02 (Very weak)
+
+MSSubClass
+----------
+Type                  int64
+Min                          20.00
+Mean                         56.90
+Max                         190.00
+Std. dev                     42.30 (74.35 %)
+Non linear Corelation         0.01 (Very weak)
+
+MSZoning
+--------
+Type        category
+RL                  1151 (78.84 %)
+RM                   218 (14.93 %)
+FV                    65 (4.45 %)
+RH                    16 (1.10 %)
+C (all)               10 (0.68 %)
+
+LotFrontage
+-----------
+Type                  float64
+Min                          21.00
+Mean                         70.05
+Max                         313.00
+Std. dev                     24.28 (34.67 %)
+Non linear Corelation         0.41 (Moderate)
+
+LotArea
+-------
+Type                  int64
+Min                       1,300.00
+Mean                     10,516.83
+Max                     215,245.00
+Std. dev                  9,981.26 (94.91 %)
+Non linear Corelation         0.46 (Moderate)
+
+Street
+------
+Type        category
+Pave                1454 (99.59 %)
+Grvl                   6 (0.41 %)
+
+Alley
+-----
+Type        category
+Grvl                  50 (3.42 %)
+Pave                  41 (2.81 %)
+
+LotShape
+--------
+Type        category
+Reg                  925 (63.36 %)
+IR1                  484 (33.15 %)
+IR2                   41 (2.81 %)
+IR3                   10 (0.68 %)
+
+LandContour
+-----------
+Type        category
+Lvl                 1311 (89.79 %)
+Bnk                   63 (4.32 %)
+HLS                   50 (3.42 %)
+Low                   36 (2.47 %)
+
+Utilities
+---------
+Type        category
+AllPub              1459 (99.93 %)
+NoSeWa                 1 (0.07 %)
+
+LotConfig
+---------
+Type        category
+Inside              1052 (72.05 %)
+Corner               263 (18.01 %)
+CulDSac               94 (6.44 %)
+FR2                   47 (3.22 %)
+FR3                    4 (0.27 %)
+
+LandSlope
+---------
+Type        category
+Gtl                 1382 (94.66 %)
+Mod                   65 (4.45 %)
+Sev                   13 (0.89 %)
+
+Neighborhood
+------------
+Type        category
+NAmes                225 (15.41 %)
+CollgCr              150 (10.27 %)
+OldTown              113 (7.74 %)
+Edwards              100 (6.85 %)
+Somerst               86 (5.89 %)
+Gilbert               79 (5.41 %)
+NridgHt               77 (5.27 %)
+Sawyer                74 (5.07 %)
+NWAmes                73 (5.00 %)
+SawyerW               59 (4.04 %)
+BrkSide               58 (3.97 %)
+Crawfor               51 (3.49 %)
+Mitchel               49 (3.36 %)
+NoRidge               41 (2.81 %)
+Timber                38 (2.60 %)
+IDOTRR                37 (2.53 %)
+ClearCr               28 (1.92 %)
+SWISU                 25 (1.71 %)
+StoneBr               25 (1.71 %)
+Blmngtn               17 (1.16 %)
+MeadowV               17 (1.16 %)
+BrDale                16 (1.10 %)
+Veenker               11 (0.75 %)
+NPkVill                9 (0.62 %)
+Blueste                2 (0.14 %)
+
+Condition1
+----------
+Type        category
+Norm                1260 (86.30 %)
+Feedr                 81 (5.55 %)
+Artery                48 (3.29 %)
+RRAn                  26 (1.78 %)
+PosN                  19 (1.30 %)
+RRAe                  11 (0.75 %)
+PosA                   8 (0.55 %)
+RRNn                   5 (0.34 %)
+RRNe                   2 (0.14 %)
+
+Condition2
+----------
+Type        category
+Norm                1445 (98.97 %)
+Feedr                  6 (0.41 %)
+Artery                 2 (0.14 %)
+RRNn                   2 (0.14 %)
+PosN                   2 (0.14 %)
+PosA                   1 (0.07 %)
+RRAn                   1 (0.07 %)
+RRAe                   1 (0.07 %)
+
+BldgType
+--------
+Type        category
+1Fam                1220 (83.56 %)
+TwnhsE               114 (7.81 %)
+Duplex                52 (3.56 %)
+Twnhs                 43 (2.95 %)
+2fmCon                31 (2.12 %)
+
+HouseStyle
+----------
+Type        category
+1Story               726 (49.73 %)
+2Story               445 (30.48 %)
+1.5Fin               154 (10.55 %)
+SLvl                  65 (4.45 %)
+SFoyer                37 (2.53 %)
+1.5Unf                14 (0.96 %)
+2.5Unf                11 (0.75 %)
+2.5Fin                 8 (0.55 %)
+
+OverallQual
+-----------
+Type                  int64
+Min                           1.00
+Mean                          6.10
+Max                          10.00
+Std. dev                      1.38 (22.67 %)
+Non linear Corelation         0.81 (Very strong)
+
+OverallCond
+-----------
+Type                  int64
+Min                           1.00
+Mean                          5.58
+Max                           9.00
+Std. dev                      1.11 (19.96 %)
+Non linear Corelation        -0.13 (Very weak)
+
+YearBuilt
+---------
+Type                  int64
+Min                       1,872.00
+Mean                      1,971.27
+Max                       2,010.00
+Std. dev                     30.20 (1.53 %)
+Non linear Corelation         0.65 (Strong)
+
+YearRemodAdd
+------------
+Type                  int64
+Min                       1,950.00
+Mean                      1,984.87
+Max                       2,010.00
+Std. dev                     20.65 (1.04 %)
+Non linear Corelation         0.57 (Moderate)
+
+RoofStyle
+---------
+Type        category
+Gable               1141 (78.15 %)
+Hip                  286 (19.59 %)
+Flat                  13 (0.89 %)
+Gambrel               11 (0.75 %)
+Mansard                7 (0.48 %)
+Shed                   2 (0.14 %)
+
+RoofMatl
+--------
+Type        category
+CompShg             1434 (98.22 %)
+Tar&Grv               11 (0.75 %)
+WdShngl                6 (0.41 %)
+WdShake                5 (0.34 %)
+Metal                  1 (0.07 %)
+Membran                1 (0.07 %)
+Roll                   1 (0.07 %)
+ClyTile                1 (0.07 %)
+
+Exterior1st
+-----------
+Type        category
+VinylSd              515 (35.27 %)
+HdBoard              222 (15.21 %)
+MetalSd              220 (15.07 %)
+Wd Sdng              206 (14.11 %)
+Plywood              108 (7.40 %)
+CemntBd               61 (4.18 %)
+BrkFace               50 (3.42 %)
+WdShing               26 (1.78 %)
+Stucco                25 (1.71 %)
+AsbShng               20 (1.37 %)
+BrkComm                2 (0.14 %)
+Stone                  2 (0.14 %)
+AsphShn                1 (0.07 %)
+ImStucc                1 (0.07 %)
+CBlock                 1 (0.07 %)
+
+Exterior2nd
+-----------
+Type        category
+VinylSd              504 (34.52 %)
+MetalSd              214 (14.66 %)
+HdBoard              207 (14.18 %)
+Wd Sdng              197 (13.49 %)
+Plywood              142 (9.73 %)
+CmentBd               60 (4.11 %)
+Wd Shng               38 (2.60 %)
+Stucco                26 (1.78 %)
+BrkFace               25 (1.71 %)
+AsbShng               20 (1.37 %)
+ImStucc               10 (0.68 %)
+Brk Cmn                7 (0.48 %)
+Stone                  5 (0.34 %)
+AsphShn                3 (0.21 %)
+Other                  1 (0.07 %)
+CBlock                 1 (0.07 %)
+
+MasVnrType
+----------
+Type        category
+BrkFace              445 (30.48 %)
+Stone                128 (8.77 %)
+BrkCmn                15 (1.03 %)
+
+MasVnrArea
+----------
+Type                  float64
+Min                           0.00
+Mean                        103.69
+Max                       1,600.00
+Std. dev                    181.07 (174.63 %)
+Non linear Corelation         0.42 (Moderate)
+
+ExterQual
+---------
+Type        category
+TA                   906 (62.05 %)
+Gd                   488 (33.42 %)
+Ex                    52 (3.56 %)
+Fa                    14 (0.96 %)
+
+ExterCond
+---------
+Type        category
+TA                  1282 (87.81 %)
+Gd                   146 (10.00 %)
+Fa                    28 (1.92 %)
+Ex                     3 (0.21 %)
+Po                     1 (0.07 %)
+
+Foundation
+----------
+Type        category
+PConc                647 (44.32 %)
+CBlock               634 (43.42 %)
+BrkTil               146 (10.00 %)
+Slab                  24 (1.64 %)
+Stone                  6 (0.41 %)
+Wood                   3 (0.21 %)
+
+BsmtQual
+--------
+Type        category
+TA                   649 (44.45 %)
+Gd                   618 (42.33 %)
+Ex                   121 (8.29 %)
+Fa                    35 (2.40 %)
+
+BsmtCond
+--------
+Type        category
+TA                  1311 (89.79 %)
+Gd                    65 (4.45 %)
+Fa                    45 (3.08 %)
+Po                     2 (0.14 %)
+
+BsmtExposure
+------------
+Type        category
+No                   953 (65.27 %)
+Av                   221 (15.14 %)
+Gd                   134 (9.18 %)
+Mn                   114 (7.81 %)
+
+BsmtFinType1
+------------
+Type        category
+Unf                  430 (29.45 %)
+GLQ                  418 (28.63 %)
+ALQ                  220 (15.07 %)
+BLQ                  148 (10.14 %)
+Rec                  133 (9.11 %)
+LwQ                   74 (5.07 %)
+
+BsmtFinSF1
+----------
+Type                  int64
+Min                           0.00
+Mean                        443.64
+Max                       5,644.00
+Std. dev                    456.10 (102.81 %)
+Non linear Corelation         0.30 (Weak)
+
+BsmtFinType2
+------------
+Type        category
+Unf                 1256 (86.03 %)
+Rec                   54 (3.70 %)
+LwQ                   46 (3.15 %)
+BLQ                   33 (2.26 %)
+ALQ                   19 (1.30 %)
+GLQ                   14 (0.96 %)
+
+BsmtFinSF2
+----------
+Type                  int64
+Min                           0.00
+Mean                         46.55
+Max                       1,474.00
+Std. dev                    161.32 (346.56 %)
+Non linear Corelation        -0.04 (Very weak)
+
+BsmtUnfSF
+---------
+Type                  int64
+Min                           0.00
+Mean                        567.24
+Max                       2,336.00
+Std. dev                    441.87 (77.90 %)
+Non linear Corelation         0.19 (Very weak)
+
+TotalBsmtSF
+-----------
+Type                  int64
+Min                           0.00
+Mean                      1,057.43
+Max                       6,110.00
+Std. dev                    438.71 (41.49 %)
+Non linear Corelation         0.60 (Strong)
+
+Heating
+-------
+Type        category
+GasA                1428 (97.81 %)
+GasW                  18 (1.23 %)
+Grav                   7 (0.48 %)
+Wall                   4 (0.27 %)
+OthW                   2 (0.14 %)
+Floor                  1 (0.07 %)
+
+HeatingQC
+---------
+Type        category
+Ex                   741 (50.75 %)
+TA                   428 (29.32 %)
+Gd                   241 (16.51 %)
+Fa                    49 (3.36 %)
+Po                     1 (0.07 %)
+
+CentralAir
+----------
+Type        category
+Y                   1365 (93.49 %)
+N                     95 (6.51 %)
+
+Electrical
+----------
+Type        category
+SBrkr               1334 (91.37 %)
+FuseA                 94 (6.44 %)
+FuseF                 27 (1.85 %)
+FuseP                  3 (0.21 %)
+Mix                    1 (0.07 %)
+
+1stFlrSF
+--------
+Type                  int64
+Min                         334.00
+Mean                      1,162.63
+Max                       4,692.00
+Std. dev                    386.59 (33.25 %)
+Non linear Corelation         0.58 (Moderate)
+
+2ndFlrSF
+--------
+Type                  int64
+Min                           0.00
+Mean                        346.99
+Max                       2,065.00
+Std. dev                    436.53 (125.80 %)
+Non linear Corelation         0.29 (Weak)
+
+LowQualFinSF
+------------
+Type                  int64
+Min                           0.00
+Mean                          5.84
+Max                         572.00
+Std. dev                     48.62 (831.94 %)
+Non linear Corelation        -0.07 (Very weak)
+
+GrLivArea
+---------
+Type                  int64
+Min                         334.00
+Mean                      1,515.46
+Max                       5,642.00
+Std. dev                    525.48 (34.67 %)
+Non linear Corelation         0.73 (Strong)
+
+BsmtFullBath
+------------
+Type                  int64
+Min                           0.00
+Mean                          0.43
+Max                           3.00
+Std. dev                      0.52 (122.00 %)
+Non linear Corelation         0.23 (Weak)
+
+BsmtHalfBath
+------------
+Type                  int64
+Min                           0.00
+Mean                          0.06
+Max                           2.00
+Std. dev                      0.24 (414.97 %)
+Non linear Corelation        -0.01 (Very weak)
+
+FullBath
+--------
+Type                  int64
+Min                           0.00
+Mean                          1.57
+Max                           3.00
+Std. dev                      0.55 (35.20 %)
+Non linear Corelation         0.64 (Strong)
+
+HalfBath
+--------
+Type                  int64
+Min                           0.00
+Mean                          0.38
+Max                           2.00
+Std. dev                      0.50 (131.34 %)
+Non linear Corelation         0.34 (Weak)
+
+BedroomAbvGr
+------------
+Type                  int64
+Min                           0.00
+Mean                          2.87
+Max                           8.00
+Std. dev                      0.82 (28.46 %)
+Non linear Corelation         0.23 (Weak)
+
+KitchenAbvGr
+------------
+Type                  int64
+Min                           0.00
+Mean                          1.05
+Max                           3.00
+Std. dev                      0.22 (21.05 %)
+Non linear Corelation        -0.16 (Very weak)
+
+KitchenQual
+-----------
+Type        category
+TA                   735 (50.34 %)
+Gd                   586 (40.14 %)
+Ex                   100 (6.85 %)
+Fa                    39 (2.67 %)
+
+TotRmsAbvGrd
+------------
+Type                  int64
+Min                           2.00
+Mean                          6.52
+Max                          14.00
+Std. dev                      1.63 (24.94 %)
+Non linear Corelation         0.53 (Moderate)
+
+Functional
+----------
+Type        category
+Typ                 1360 (93.15 %)
+Min2                  34 (2.33 %)
+Min1                  31 (2.12 %)
+Mod                   15 (1.03 %)
+Maj1                  14 (0.96 %)
+Maj2                   5 (0.34 %)
+Sev                    1 (0.07 %)
+
+Fireplaces
+----------
+Type                  int64
+Min                           0.00
+Mean                          0.61
+Max                           3.00
+Std. dev                      0.64 (105.16 %)
+Non linear Corelation         0.52 (Moderate)
+
+FireplaceQu
+-----------
+Type        category
+Gd                   380 (26.03 %)
+TA                   313 (21.44 %)
+Fa                    33 (2.26 %)
+Ex                    24 (1.64 %)
+Po                    20 (1.37 %)
+
+GarageType
+----------
+Type        category
+Attchd               870 (59.59 %)
+Detchd               387 (26.51 %)
+BuiltIn               88 (6.03 %)
+Basment               19 (1.30 %)
+CarPort                9 (0.62 %)
+2Types                 6 (0.41 %)
+
+GarageYrBlt
+-----------
+Type                  float64
+Min                       1,900.00
+Mean                      1,978.51
+Max                       2,010.00
+Std. dev                     24.69 (1.25 %)
+Non linear Corelation         0.59 (Moderate)
+
+GarageFinish
+------------
+Type        category
+Unf                  605 (41.44 %)
+RFn                  422 (28.90 %)
+Fin                  352 (24.11 %)
+
+GarageCars
+----------
+Type                  int64
+Min                           0.00
+Mean                          1.77
+Max                           4.00
+Std. dev                      0.75 (42.29 %)
+Non linear Corelation         0.69 (Strong)
+
+GarageArea
+----------
+Type                  int64
+Min                           0.00
+Mean                        472.98
+Max                       1,418.00
+Std. dev                    213.80 (45.20 %)
+Non linear Corelation         0.65 (Strong)
+
+GarageQual
+----------
+Type        category
+TA                  1311 (89.79 %)
+Fa                    48 (3.29 %)
+Gd                    14 (0.96 %)
+Ex                     3 (0.21 %)
+Po                     3 (0.21 %)
+
+GarageCond
+----------
+Type        category
+TA                  1326 (90.82 %)
+Fa                    35 (2.40 %)
+Gd                     9 (0.62 %)
+Po                     7 (0.48 %)
+Ex                     2 (0.14 %)
+
+PavedDrive
+----------
+Type        category
+Y                   1340 (91.78 %)
+N                     90 (6.16 %)
+P                     30 (2.05 %)
+
+WoodDeckSF
+----------
+Type                  int64
+Min                           0.00
+Mean                         94.24
+Max                         857.00
+Std. dev                    125.34 (132.99 %)
+Non linear Corelation         0.35 (Weak)
+
+OpenPorchSF
+-----------
+Type                  int64
+Min                           0.00
+Mean                         46.66
+Max                         547.00
+Std. dev                     66.26 (142.00 %)
+Non linear Corelation         0.48 (Moderate)
+
+EnclosedPorch
+-------------
+Type                  int64
+Min                           0.00
+Mean                         21.95
+Max                         552.00
+Std. dev                     61.12 (278.40 %)
+Non linear Corelation        -0.22 (Weak)
+
+3SsnPorch
+---------
+Type                  int64
+Min                           0.00
+Mean                          3.41
+Max                         508.00
+Std. dev                     29.32 (859.85 %)
+Non linear Corelation         0.07 (Very weak)
+
+ScreenPorch
+-----------
+Type                  int64
+Min                           0.00
+Mean                         15.06
+Max                         480.00
+Std. dev                     55.76 (370.21 %)
+Non linear Corelation         0.10 (Very weak)
+
+PoolArea
+--------
+Type                  int64
+Min                           0.00
+Mean                          2.76
+Max                         738.00
+Std. dev                     40.18 (1456.28 %)
+Non linear Corelation         0.06 (Very weak)
+
+PoolQC
+------
+Type        category
+Gd                     3 (0.21 %)
+Ex                     2 (0.14 %)
+Fa                     2 (0.14 %)
+
+Fence
+-----
+Type        category
+MnPrv                157 (10.75 %)
+GdPrv                 59 (4.04 %)
+GdWo                  54 (3.70 %)
+MnWw                  11 (0.75 %)
+
+MiscFeature
+-----------
+Type        category
+Shed                  49 (3.36 %)
+Gar2                   2 (0.14 %)
+Othr                   2 (0.14 %)
+TenC                   1 (0.07 %)
+
+MiscVal
+-------
+Type                  int64
+Min                           0.00
+Mean                         43.49
+Max                      15,500.00
+Std. dev                    496.12 (1140.80 %)
+Non linear Corelation        -0.06 (Very weak)
+
+MoSold
+------
+Type                  int64
+Min                           1.00
+Mean                          6.32
+Max                          12.00
+Std. dev                      2.70 (42.77 %)
+Non linear Corelation         0.07 (Very weak)
+
+YrSold
+------
+Type                  int64
+Min                       2,006.00
+Mean                      2,007.82
+Max                       2,010.00
+Std. dev                      1.33 (0.07 %)
+Non linear Corelation        -0.03 (Very weak)
+
+SaleType
+--------
+Type        category
+WD                  1267 (86.78 %)
+New                  122 (8.36 %)
+COD                   43 (2.95 %)
+ConLD                  9 (0.62 %)
+ConLI                  5 (0.34 %)
+ConLw                  5 (0.34 %)
+CWD                    4 (0.27 %)
+Oth                    3 (0.21 %)
+Con                    2 (0.14 %)
+
+SaleCondition
+-------------
+Type        category
+Normal              1198 (82.05 %)
+Partial              125 (8.56 %)
+Abnorml              101 (6.92 %)
+Family                20 (1.37 %)
+Alloca                12 (0.82 %)
+AdjLand                4 (0.27 %)
+
