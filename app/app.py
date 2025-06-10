@@ -9,7 +9,7 @@ import json
 # Add parent directory to path for imports
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "../")))
 from src.features.build_features import engineer_features
-from src.data_preprocessing.preprocess import clean_data
+from src.data_preprocessing.preprocess import clean_data, encode_hierarchical_categories
 
 # Load the trained model
 @st.cache_resource
@@ -57,12 +57,13 @@ def prepare_input_for_prediction(user_input, model_features):
         df['MoSold'] = 6     # Default sale month
     
     # Clean data (handle any remaining missing values)
-    df = clean_data(df)
+    df = clean_data(df, do_remove_outliers=False)
     
     # Engineer features (this adds our 10 new features)
     df = engineer_features(df, is_training=False)
     
     # One-hot encode
+    df = encode_hierarchical_categories(df)
     df = pd.get_dummies(df)
     
     # Align with model features
@@ -178,6 +179,10 @@ with st.expander("🔧 See Calculated Features"):
 # Prediction button
 if st.button("🎯 Predict House Price", type="primary"):
     if model:
+        # Load dataset
+        dataset: pd.DataFrame = pd.read_csv("datasets/ames-train.csv")
+        import pdb
+
         # Prepare input data - include all the fields needed for feature engineering
         input_data = {
             # Size features
@@ -228,20 +233,20 @@ if st.button("🎯 Predict House Price", type="primary"):
             'ExterQual': 'TA',
             'ExterCond': 'TA',
             'Foundation': 'PConc',
-            'BsmtQual': 'TA' if total_bsmt_sf > 0 else 'NA',
-            'BsmtCond': 'TA' if total_bsmt_sf > 0 else 'NA',
-            'BsmtExposure': 'No' if total_bsmt_sf > 0 else 'NA',
-            'BsmtFinType1': 'Unf' if total_bsmt_sf > 0 else 'NA',
+            'BsmtQual': 'TA' if total_bsmt_sf > 0 else dataset["BsmtQual"].mode()[0],
+            'BsmtCond': 'TA' if total_bsmt_sf > 0 else dataset["BsmtCond"].mode()[0],
+            'BsmtExposure': 'No' if total_bsmt_sf > 0 else dataset["BsmtExposure"].mode()[0],
+            'BsmtFinType1': 'Unf' if total_bsmt_sf > 0 else dataset["BsmtFinType1"].mode()[0],
             'Heating': 'GasA',
             'HeatingQC': 'Ex',
             'CentralAir': 'Y',
             'Electrical': 'SBrkr',
             'KitchenQual': 'TA',
             'Functional': 'Typ',
-            'GarageType': 'Attchd' if garage_cars > 0 else 'NA',
-            'GarageFinish': 'Unf' if garage_cars > 0 else 'NA',
-            'GarageQual': 'TA' if garage_cars > 0 else 'NA',
-            'GarageCond': 'TA' if garage_cars > 0 else 'NA',
+            'GarageType': 'Attchd' if garage_cars > 0 else dataset["GarageType"].mode()[0],
+            'GarageFinish': 'Unf' if garage_cars > 0 else dataset["GarageFinish"].mode()[0],
+            'GarageQual': 'TA' if garage_cars > 0 else dataset["GarageQual"].mode()[0],
+            'GarageCond': 'TA' if garage_cars > 0 else dataset["GarageCond"].mode()[0],
             'PavedDrive': 'Y',
             'SaleType': 'WD',
             'SaleCondition': 'Normal',
@@ -255,7 +260,7 @@ if st.button("🎯 Predict House Price", type="primary"):
             'MasVnrType': 'None',
             'MasVnrArea': 0,
             'BsmtFinSF1': 0,
-            'BsmtFinType2': 'Unf' if total_bsmt_sf > 0 else 'NA',
+            'BsmtFinType2': 'Unf' if total_bsmt_sf > 0 else dataset["BsmtFinType2"].mode()[0],
             'BsmtFinSF2': 0,
             'BsmtUnfSF': total_bsmt_sf,
             'LowQualFinSF': 0,
@@ -266,14 +271,14 @@ if st.button("🎯 Predict House Price", type="primary"):
             '3SsnPorch': 0,
             'ScreenPorch': 0,
             'PoolArea': 0,
-            'PoolQC': 'NA',
-            'Fence': 'NA',
-            'MiscFeature': 'NA',
+            'PoolQC': dataset["PoolQC"].mode()[0],
+            'Fence': dataset["Fence"].mode()[0],
+            'MiscFeature': dataset["MiscFeature"].mode()[0],
             'MiscVal': 0,
             'MoSold': 6,  # Default to June
-            'Alley': 'NA',
+            'Alley': dataset["Alley"].mode()[0],
             'LotFrontage': 65,  # Default value
-            'FireplaceQu': 'Gd' if fireplaces > 0 else 'NA'
+            'FireplaceQu': 'Gd' if fireplaces > 0 else dataset["FireplaceQu"].mode()[0]
         }
         
         # Get model features
