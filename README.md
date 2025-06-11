@@ -89,7 +89,6 @@ Ten projekt estymuje ceny nieruchomości używając datasetu z Ames, Iowa. Proje
    streamlit run app/app.py
    ```
 
-   The Streamlit app provides a simple form to enter house details and view the predicted price. Make sure the trained model (`house_price_model.pkl`) and the cleaned dataset (`ames-train-clean.csv`) are available in the expected folders before running the app.
    Aplikacja Streamlit umożliwia wprowadzanie danych o domu i wyświetlanie przewidywanej ceny. Upewnij się, że wytrenowany model (`house_price_model.pkl`) i przetworzone datasety (`ames-train-clean.csv`, `ames-train-featured.csv`, `ames-test-featured.csv`) znajdują się w odpowiednich folderach przed uruchomieniem aplikacji.
 
 6. **--- Alternatywnie : uruchomienie całego projektu za pomocą jednego skryptu ---**
