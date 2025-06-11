@@ -317,5 +317,4 @@ if st.button("🎯 Predict House Price", type="primary"):
 st.markdown("---")
 st.markdown(
     "*Disclaimer of Grand Prognostication: The aforementioned predictive output, herein referred to as the 'Estimation Artifact,' is derived via arcane computational rituals involving historical datasets and algorithmic sorcery commonly labeled 'machine learning.'*\n\n"
-    "*By proceeding to view or otherwise engage with said Estimation Artifact, the user (henceforth 'You, the Valued Price Enthusiast') acknowledges, accepts, and spiritually aligns with the cosmic truth that actual housing prices may diverge wildly, chaotically, and with reckless abandon from any numbers herein conjured—due to, but not limited to, market whimsy, acts of bureaucracy, lunar phases, interest rate voodoo, and the capricious decisions of financial deities.*"
 )

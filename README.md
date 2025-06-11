@@ -85,7 +85,7 @@ This project predicts house prices using the Ames, Iowa housing dataset. It incl
 
 - Jacek Szlączka
 - Marcin Michalak
-- 
+- Dawid Waligórski
 - 
 - 
 
@@ -98,9 +98,3 @@ This project predicts house prices using the Ames, Iowa housing dataset. It incl
 - Logging output (e.g., missing data imputs) goes to `logs/preprocess.log`.
 
 ---
-
-## 🚧 TODOs
-
-- Add unit tests under `tests/` *Optional*
-- Optionally switch to `LinearRegression` model for simplicity or a different more advanced model *Optional*
-- Prepare final submission script to predict on `ames-test.csv` *Optional*
