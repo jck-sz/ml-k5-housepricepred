@@ -115,8 +115,8 @@ Aby uzyskać szczegółowe informacje na temat tego projektu, zapoznaj się z po
 
 ## 👥 Zespół
 
-- Mateusz Mierzwa
 - Marcin Michalak
+- Mateusz Mierzwa
 - Jacek Szlączka
 - Dawid Waligórski
 - 
