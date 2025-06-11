@@ -5,6 +5,20 @@ Ten projekt estymuje ceny nieruchomości używając datasetu z Ames, Iowa. Proje
 
 ---
 
+## 📚 Dokumentacja projektu
+
+Aby uzyskać szczegółowe informacje na temat tego projektu, zapoznaj się z poniższą dokumentacją:
+
+### Dokumentacja projektu
+1. **[📖 Wstęp](docs/01%20-%20wstęp.md)** - Opis problemu oraz celu projektu
+2. **[📊 Źródło danych (dataset)](docs/02%20-%20dataset.md)** - Opis datasetu użytego do trenowania modelu  
+3. **[🔧 Przetwarzanie wstępne (preprocessing)](docs/03%20-%20preprocessing.md)** - Opis procesu preprocessingu danych
+4. **[🤖 Budowa modelu](docs/04%20-%20Budowa%20modelu.md)** - Architektura modelu oraz opis procesu jego budowy
+5. **[📈 Ewaluacja modelu](docs/05%20-%20Ewaluacja%20modelu.md)** - Analiza metryk modelu
+6. **[💡 Wnioski](docs/06%20-%20Wnioski.md)** - Wnioski projektowe
+
+---
+
 ## 📁 Struktura projektu
 
 ```
@@ -60,6 +74,8 @@ Ten projekt estymuje ceny nieruchomości używając datasetu z Ames, Iowa. Proje
 ```
 
 ---
+## 
+
 
 ## 🚀 Jak uruchomić projekt
 
