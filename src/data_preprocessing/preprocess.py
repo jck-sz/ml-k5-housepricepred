@@ -1,15 +1,13 @@
 import sys
 import os  
 
-# This makes sure we can import logger from the src folder (we are nested 2 levels inside the root)
+# This makes sure we can import modules from the src folder (we are nested 2 levels inside the root)
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "../../")))
 import pandas as pd
 from sklearn.impute import SimpleImputer
 from sklearn.preprocessing import OrdinalEncoder
 from src.utils.logger import get_logger
 from src.features.build_features import engineer_features
-from src.features.build_features import engineer_features
-
 
 logger = get_logger(__name__, log_file="logs/preprocess.log")
 
