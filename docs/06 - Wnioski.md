@@ -1,3 +1,4 @@
+
 [🏠 ← Powrót do README](../README.md)
 
 # 6. Wyniki i wnioski

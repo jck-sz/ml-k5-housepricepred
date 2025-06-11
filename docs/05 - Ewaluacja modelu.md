@@ -1,3 +1,6 @@
+
+[🏠 ← Powrót do README](../README.md)
+
 # 5. Ewaluacja modelu
 
 - [5. Ewaluacja modelu](#5-ewaluacja-modelu)
@@ -163,3 +166,5 @@ Model jest gotowy do zastosowania praktycznego, szczególnie dla nieruchomości 
 - Dodatkową inżynierię cech specyficznych dla luksusowych lub bardzo tanich nieruchomości
 
 Szczegółowy raport z ewaluacji oraz pełne wyniki dostępne są w katalogu `evaluation/`.
+
+[🏠 ← Powrót do README](../README.md)

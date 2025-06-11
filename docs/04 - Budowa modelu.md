@@ -1,3 +1,6 @@
+
+[🏠 ← Powrót do README](../README.md)
+
 # 4. Budowa modelu
 
 - [4. Budowa modelu](#4-budowa-modelu)
@@ -138,3 +141,5 @@ Wytrenowany model oraz metadane zostały zapisane w następujących plikach:
 - `evaluation/validation_actual.csv` - rzeczywiste wartości dla zbioru walidacyjnego
 
 Taka struktura zapisu umożliwia łatwe wczytanie modelu do predykcji oraz przeprowadzenie szczegółowej analizy jego działania.
+
+[🏠 ← Powrót do README](../README.md)

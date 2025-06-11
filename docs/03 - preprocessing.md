@@ -1,3 +1,6 @@
+
+[🏠 ← Powrót do README](../README.md)
+
 # 3. Preprocessing
 
 - [3. Preprocessing](#3-preprocessing)
@@ -90,3 +93,5 @@ W ramach pogłębionego preprocessingu rozważono 12 jego wariantów, które prz
 | 12 | 1 HOT               | nie usuwaj                | dominanta                        | 0.8967 | 8.80 % |
 
 Z przeproszdzonej analizy jasno wynika, że najkorzystniejsze wyniki estymacji uzyskujemy dla wariantu #9, który ostatecznie zotstał wykorzystany jako docelowy wariant preprocessingu w projekcie. Należy jednak zauważyć, że różnice pomiędzy wariantami nie są znaczące, nie przekraczając 1.13 p.p dla metryki $MAPE$ oraz 0.0343 dla metryki $R^2$.
+
+[🏠 ← Powrót do README](../README.md)
