@@ -1,5 +1,5 @@
 {
-    "training_date": "2025-06-10 21:22:18",
+    "training_date": "2025-06-11 19:01:54",
     "model_type": "RandomForestRegressor",
     "parameters": {
         "bootstrap": false,
@@ -11,16 +11,16 @@
     },
     "metrics": {
         "validation": {
-            "rmse": 19299.6866673313,
+            "rmse": 19299.686667331305,
             "mae": 13423.83816836975,
             "r2": 0.9048956327006473,
             "mape": 8.374073058123543
         },
         "cross_validation": {
             "cv_rmse_mean": 22058.032035709144,
-            "cv_rmse_std": 2268.624907304361,
+            "cv_rmse_std": 2268.62490730436,
             "cv_r2_mean": 0.8796292123837901,
-            "cv_r2_std": 0.021258527637398876
+            "cv_r2_std": 0.02125852763739885
         },
         "n_samples_train": 1137,
         "n_samples_val": 285,
@@ -29,83 +29,83 @@
     "top_features": [
         {
             "feature": "QualityPriceInteraction",
-            "importance": 0.1004120622592338
+            "importance": 0.10041206225923383
         },
         {
             "feature": "TotalSF",
-            "importance": 0.0868058322003126
+            "importance": 0.08680583220031259
         },
         {
             "feature": "OverallQual",
-            "importance": 0.06542895021760946
+            "importance": 0.06542895021760947
         },
         {
             "feature": "GrLivArea",
-            "importance": 0.056087658824191755
+            "importance": 0.05608765882419177
         },
         {
             "feature": "ExterQual",
-            "importance": 0.04097490264600266
+            "importance": 0.04097490264600267
         },
         {
             "feature": "KitchenQual",
-            "importance": 0.038407561297423974
+            "importance": 0.03840756129742398
         },
         {
             "feature": "TotalBsmtSF",
-            "importance": 0.03488789728642637
+            "importance": 0.03488789728642638
         },
         {
             "feature": "OverallQualityScore",
-            "importance": 0.03389535308825168
+            "importance": 0.03389535308825169
         },
         {
             "feature": "GarageCapacity",
-            "importance": 0.03202183299989532
+            "importance": 0.032021832999895326
         },
         {
             "feature": "GarageCars",
-            "importance": 0.03041061746780556
+            "importance": 0.030410617467805566
         },
         {
             "feature": "GarageArea",
-            "importance": 0.030138127585960094
+            "importance": 0.0301381275859601
         },
         {
             "feature": "TotalBathrooms",
-            "importance": 0.028805969847803415
+            "importance": 0.028805969847803422
         },
         {
             "feature": "YearBuilt",
-            "importance": 0.028277336115195534
+            "importance": 0.02827733611519554
         },
         {
             "feature": "1stFlrSF",
-            "importance": 0.02497885059291077
+            "importance": 0.024978850592910776
         },
         {
             "feature": "GarageYrBlt",
-            "importance": 0.02211886277153537
+            "importance": 0.022118862771535366
         },
         {
             "feature": "HouseAge",
-            "importance": 0.0210763830448755
+            "importance": 0.021076383044875503
         },
         {
             "feature": "BsmtQual",
-            "importance": 0.020358559084259462
+            "importance": 0.020358559084259466
         },
         {
             "feature": "FullBath",
-            "importance": 0.017917627033539416
+            "importance": 0.01791762703353942
         },
         {
             "feature": "Fireplaces",
-            "importance": 0.017210336344009876
+            "importance": 0.01721033634400988
         },
         {
             "feature": "YearRemodAdd",
-            "importance": 0.017103665140161303
+            "importance": 0.017103665140161307
         }
     ]
 }

@@ -71,9 +71,7 @@ def clean_data(df: pd.DataFrame, do_remove_outliers:bool = True):
 
     df.loc[:, cat_cols] = cat_imputer.fit_transform(df[cat_cols])
     
-    print("Data cleaning complete")
-    
-    print("Data cleaning complete")
+    print("Data cleaning complete")        
     return df
 
 
