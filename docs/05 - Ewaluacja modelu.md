@@ -93,13 +93,13 @@ Szczegółowa analiza błędów wykazała:
 
 ### 5.3.1 Wykres rzeczywiste vs przewidywane
 
-![Actual vs Predicted](evaluation/plots/actual_vs_predicted.png)
+![Actual vs Predicted](../evaluation/plots/actual_vs_predicted.png)
 
 Wykres rozrzutu pokazuje silną korelację między cenami rzeczywistymi a przewidywanymi. Większość punktów skupia się blisko linii idealnej predykcji (czerwona przerywana), co potwierdza wysoką dokładność modelu.
 
 ### 5.3.2 Wykres reszt
 
-![Residual Plot](evaluation/plots/residual_plot.png)
+![Residual Plot](../evaluation/plots/residual_plot.png)
 
 Wykres reszt względem wartości przewidywanych pokazuje:
 - Losowy rozkład reszt wokół zera
@@ -108,7 +108,7 @@ Wykres reszt względem wartości przewidywanych pokazuje:
 
 ### 5.3.3 Rozkład błędów
 
-![Error Distributions](evaluation/plots/error_distributions.png)
+![Error Distributions](../evaluation/plots/error_distributions.png)
 
 Histogramy przedstawiają:
 - **Rozkład błędów bezwzględnych**: Prawostronnie skośny z medianą $9,854
@@ -116,7 +116,7 @@ Histogramy przedstawiają:
 
 ### 5.3.4 Wydajność modelu według przedziałów cenowych
 
-![Performance by Price Range](evaluation/plots/performance_by_price_range.png)
+![Performance by Price Range](../evaluation/plots/performance_by_price_range.png)
 
 | Przedział cenowy | MAPE | Liczba domów |
 |------------------|------|--------------|
@@ -131,7 +131,7 @@ Model najlepiej radzi sobie z domami w przedziale $150-250k, które stanowią g�
 
 ### 5.3.5 Wykres Q-Q reszt
 
-![Q-Q Plot](evaluation/plots/qq_plot.png)
+![Q-Q Plot](../evaluation/plots/qq_plot.png)
 
 Wykres kwantyl-kwantyl pokazuje, że rozkład reszt jest zbliżony do normalnego, z niewielkimi odchyleniami na krańcach rozkładu.
 
