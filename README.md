@@ -1,106 +1,129 @@
-# 🏠 House Price Prediction (Ames Housing Data)
+# 🏠 Estymacja cen nieruchomości (Ames Housing Data)
 # ml-k5-housepricepred repo
-This project predicts house prices using the Ames, Iowa housing dataset. It includes data preprocessing, feature engineering, model training, and a web interface for user input and price prediction.
+
+Ten projekt estymuje ceny nieruchomości używając datasetu z Ames, Iowa. Projekt zawiera preprocessing, inżynierię cech, trenowanie modelu oraz interfejs webowy pozwalający na wprowadzanie danych i uzyskiwanie predykcji.
 
 ---
 
-## 📁 Project Structure
+## 📚 Dokumentacja projektu
+
+Aby uzyskać szczegółowe informacje na temat tego projektu, zapoznaj się z poniższą dokumentacją:
+
+### Dokumentacja projektu
+1. **[📖 Wstęp](docs/01%20-%20wstęp.md)** - Opis problemu oraz celu projektu
+2. **[📊 Źródło danych (dataset)](docs/02%20-%20dataset.md)** - Opis datasetu użytego do trenowania modelu  
+3. **[🔧 Przetwarzanie wstępne (preprocessing)](docs/03%20-%20preprocessing.md)** - Opis procesu preprocessingu danych
+4. **[🤖 Budowa modelu](docs/04%20-%20Budowa%20modelu.md)** - Architektura modelu oraz opis procesu jego budowy
+5. **[📈 Ewaluacja modelu](docs/05%20-%20Ewaluacja%20modelu.md)** - Analiza metryk modelu
+6. **[💡 Wnioski](docs/06%20-%20Wnioski.md)** - Wnioski projektowe
+
+---
+
+## 📁 Struktura projektu
 
 ```
 .
-├── app/                      # Streamlit or Flask frontend app for predictions
+├── app/                            # Aplikacja korzystająca z frameworka Streamlit
 │   └── app.py
 │
-├── datasets/                # Raw and processed data files
-│   ├── processed/           # Output of cleaned data
+├── datasets/                       # Dataset zawierający bazowe oraz przetworzone dane
+│   ├── processed/                  # Przetworzone datasety
 │   │   └── ames-train-clean.csv
-│   ├── ames-train.csv       # Raw training dataset
-│   ├── ames-test.csv        # Raw test dataset, supposed to be used for Kaggle submission
-│   └── ames-data_description.txt  # Column descriptions from dataset source
+│   │   └── ames-train-featured.csv
+│   |   └── ames-test-featured.csv
+│   ├── ames-train.csv              # Bazowy dataset do trenowania modelu
+│   └── ames-data_description.txt   # Opis cech datasetu bazowego
+│   └── base-dataset-report.txt     # Raport z analizy datasetu bazowego
 │
-├── logs/                    # Log files generated during preprocessing
+├── docs/                           # Dokumentacja
+│   ├── 01 - wstęp.md               # Wstęp do projektu
+│   ├── 02 - dataset.md             # Opis datasetu bazowego
+│   ├── 03 - preprocessing.md       # Opis procesu preprocessingu 
+│   ├── 04 - Budowa modelu.md       # Opis budowy modelu
+│   ├── 05 - Ewaluacja modelu.md    # Opis procesu ewaluacji modelu oraz jej wyników
+|   └── 06 - Wnioski.md             # Wnioski z projektu
+|
+├── logs/                           # Logi z preprocessingu
 │   └── preprocess.log
 │
-├── model/                   # Trained model artifacts (e.g., .pkl files)
-│   └── house_price_model.pkl (to be generated and ignored by Git)
+├── model/                          # Pliki wynikowe po trenowaniu modelu
+│   └── house_price_model.pkl       # Wytrenowany model
+│   └── model_metadata.json         # Metadane modelu
+│   └── feature_importance.csv      # Ważność cech
 │
-├── src/                     # Source code for the ML pipeline
-│   ├── data_preprocessing/  # Data cleaning scripts
-│   │   └── preprocess.py
-│   ├── features/            # Feature engineering code
-│   │   └── build_features.py
-│   ├── models/              # Model training and prediction
-│   │   ├── train_model.py
-│   │   └── predict.py
-│   └── utils/               # Utility functions (e.g., logger)
-│       └── logger.py
+├── src/                            # Kod projektu
+│   ├── data_preprocessing/  
+│   │   └── preprocess.py           # Skrypt preprocessingu danych
+│   ├── dataset_analysis/  
+│   │   └── analyze_dataset.py      # Skrypt do analizy datasetu bazowego
+│   ├── features/            
+│   │   └── build_features.py       # Skrypt inżynierii cech
+│   ├── models/                     
+│   │   └── train_model.py          # Skrypt trenowania modelu
+│   └── utils/                      
+│       └── logger.py               # Moduł logowania (używany w preprocessingu)
 │
-├── tests/                   # Unit tests for key components
-│   └── test_*.py
 │
-├── .gitignore               # Git ignored files (e.g., .venv, logs)
-├── requirements.txt         # Python dependencies
-└── README.md                # Project overview (this file)
+├── .gitignore                      # gitignore
+├── requirements.txt                # Lista wymaganych bibliotek
+├── run_all.py                      # Skrypt do uruchomienia całego projektu
+├── evaluate_model.py               # Skrypt do ewaluacji modelu i generowania części wykresów
+├── wymagania.md                    # Wymagania projektowe, tracking TODOs na potrzeby projektu
+│
+└── README.md                       # Opis projektu (ten plik)
 ```
 
 ---
+## 
 
-## 🚀 How to Run the Project
 
-1. **Set up your virtual environment**
+## 🚀 Jak uruchomić projekt
+
+1. **Aktywuj swoje środowisko wirtualne (venv)**
    ```bash
    python -m venv .venv
-   .venv\Scripts\Activate.ps1   # or source .venv/bin/activate on macOS/Linux
+   .venv\Scripts\Activate.ps1   # lub `source .venv/bin/activate na macOS/Linux`
    ```
 
-2. **Install dependencies**
+2. **Zainstaluj wymagane biblioteki**
    ```bash
    pip install -r requirements.txt
    ```
 
-3. **Preprocess the data**
+3. **Uruchom skrypt do preprocessingu danych**
    ```bash
    python src/data_preprocessing/preprocess.py
    ```
 
-4. **Train the model**
+4. **Uruchom skrypt do trenowania modelu. Uwaga! Trenowanie modelu może potrwać do 1 godziny, w zależności od wydajności komputera.**
    ```bash
    python src/models/train_model.py
    ```
 
-5. **Launch the app**
+5. **Uruchom aplikację webową**
    ```bash
    streamlit run app/app.py
    ```
 
-   The Streamlit app provides a simple form to enter house details and view the predicted price. Make sure the trained model (`house_price_model.pkl`) and the cleaned dataset (`ames-train-clean.csv`) are available in the expected folders before running the app.
+   Aplikacja Streamlit umożliwia wprowadzanie danych o domu i wyświetlanie przewidywanej ceny. Upewnij się, że wytrenowany model (`house_price_model.pkl`) i przetworzone datasety (`ames-train-clean.csv`, `ames-train-featured.csv`, `ames-test-featured.csv`) znajdują się w odpowiednich folderach przed uruchomieniem aplikacji.
 
-6. **--- ALTERNATIVELY : run all in one go---**
+6. **--- Alternatywnie : uruchomienie całego projektu za pomocą jednego skryptu ---**
    ```bash
    python run_all.py
    ```
 ---
 
-## 👥 Contributors
+## 👥 Zespół
 
-- Jacek Szlączka
 - Marcin Michalak
-- 
-- 
+- Mateusz Mierzwa
+- Jacek Szlączka
+- Dawid Waligórski
 - 
 
 ---
 
-## 📌 Notes
+## 📌 Uwagi
 
-- All model artifacts and logs are excluded from Git using `.gitignore`.
-- Cleaned data is stored in `datasets/processed/`.
-- Logging output (e.g., missing data imputs) goes to `logs/preprocess.log`.
-
+- Wszystkie artefakty modelu i logi są wykluczane z Gita za pomocą `.gitignore`.
 ---
-
-## 🚧 TODOs
-
-- Add unit tests under `tests/` *Optional*
-- Optionally switch to `LinearRegression` model for simplicity or a different more advanced model *Optional*
-- Prepare final submission script to predict on `ames-test.csv` *Optional*

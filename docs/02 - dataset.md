@@ -1,3 +1,6 @@
+
+[🏠 ← Powrót do README](../README.md)
+
 # 2. Źródło danych (dataset)
 
 - [2. Źródło danych (dataset)](#2-źródło-danych-dataset)
@@ -49,3 +52,5 @@ Dokonano także analizy nieliniowych korelacji (Spearmana) pomiędzy liczbowymi 
 Na poniższym rysunku zamieszczono udział poszczególnych typów kolumn w bazowym zbiorze danych. Należy zauważyć, że największą grupę tworzą w nim kolumny kategoryczne, przedstawiane w formie obiektów przechowujących ciągi znaków. Pozostałe kolumny zawierają wartości liczbowe.
 
 ![types pie chart](/datasets/plots/base/types.png)
+
+[🏠 ← Powrót do README](../README.md)
